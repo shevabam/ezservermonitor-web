@@ -4,7 +4,7 @@
 
 In its [Web](http://www.ezservermonitor.com/esm-web/features) version eSM is a PHP script that displays on a Web page information such as:
 
-![](http://esm.localhost/uploads/esm_web/esm-web_dashboard-complete.png)
+![](http://www.ezservermonitor.com/uploads/esm_web/esm-web_dashboard-complete.png)
 
 - **System** : hostname, OS, kernel version, uptime, last boot date, number of current user(s), server datetime
 - **Load average** : gauges showing the CPU load with the percentage (1 minute, 5 minutes et 15 minutes)
