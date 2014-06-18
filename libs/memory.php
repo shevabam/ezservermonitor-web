@@ -2,13 +2,13 @@
 require 'Utils/Misc.class.php';
 
 // Free
-if (!($free = shell_exec('grep MemFree /proc/meminfo | awk \'{print $2}\'')))
+if (!($free = shell_exec('/usr/bin/free -to | grep Mem: | awk \'{print $4+$6+$7}\'')))
 {
     $free = 0;
 }
 
 // Total
-if (!($total = shell_exec('grep MemTotal /proc/meminfo | awk \'{print $2}\'')))
+if (!($total = shell_exec('/usr/bin/free -to | grep Mem: | awk \'{print $2}\'')))
 {
     $total = 0;
 }

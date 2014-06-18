@@ -7,7 +7,7 @@ class Config
 
     public function __construct()
     {
-        $this->file = $_SERVER['DOCUMENT_ROOT'].'/esm.config.json';
+        $this->file = __DIR__.'/../../esm.config.json';
 
         if (file_exists($this->file))
             $this->_readFile();
@@ -16,7 +16,7 @@ class Config
     private function _readFile()
     {
         $content = file_get_contents($this->file);
-        $this->config = json_decode($content, true);
+        $this->config = json_decode(utf8_encode($content), true);
     }
 
 

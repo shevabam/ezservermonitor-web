@@ -1,7 +1,6 @@
 <?php
 require 'Utils/Misc.class.php';
 
-
 // Free
 if (!($free = shell_exec('grep SwapFree /proc/meminfo | awk \'{print $2}\'')))
 {

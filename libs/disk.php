@@ -1,9 +1,11 @@
 <?php
 require 'Utils/Misc.class.php';
+require 'Utils/Config.class.php';
+$Config = new Config();
 
 $datas = array();
 
-if (!(exec('/bin/df | awk \'{print $2","$3","$4","$5","$6}\'', $df)))
+if (!(exec('/bin/df -T | tail -n +2 | awk \'{print $2","$3","$4","$5","$6","$7}\'', $df)))
 {
     $datas[] = array(
         'total'         => 'N.A',
@@ -15,19 +17,14 @@ if (!(exec('/bin/df | awk \'{print $2","$3","$4","$5","$6}\'', $df)))
 }
 else
 {
-    $first_line = false;
-
     $mounted_points = array();
 
     foreach ($df as $mounted)
     {
-        if ($first_line === false)
-        {
-            $first_line = true;
-            continue;
-        }
+        list($type, $total, $used, $free, $percent, $mount) = explode(',', $mounted);
 
-        list($total, $used, $free, $percent, $mount) = explode(',', $mounted);
+        if (strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false)
+            continue;
 
         if (!in_array($mount, $mounted_points))
         {

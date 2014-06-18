@@ -9,8 +9,8 @@ if (count($Config->get('services')) > 0)
 {
     foreach ($Config->get('services') as $service)
     {
-        $ip = 'localhost';
-        $sock = @fsockopen($ip, $service['port'], $num, $error, 5);
+        $host = $service['host'];
+        $sock = @fsockopen($host, $service['port'], $num, $error, 5);
         
         if ($sock)
         {

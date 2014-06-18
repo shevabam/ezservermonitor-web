@@ -7,7 +7,22 @@ $hostname = php_uname('n');
 // OS
 if (!($os = shell_exec('/usr/bin/lsb_release -ds')))
 {
-    $os = 'N.A';
+    if (!($os = shell_exec('cat /etc/fedora-release')))
+    {
+        if (!($os = shell_exec('cat /etc/redhat-release')))
+        {
+            if (!($os = shell_exec('cat /etc/mandriva-release')))
+            {
+                if (!($os = shell_exec('cat /etc/SuSE-release')))
+                {
+                    if (!($os = shell_exec('cat /etc/centos-release')))
+                    {
+                        $os = 'N.A';
+                    }
+                }
+            }
+        }
+    }
 }
 
 // Kernel

@@ -8,7 +8,7 @@ $update = $Config->checkUpdate();
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>eZ Server Monitor - <?= Misc::getHostname(); ?></title>
+    <title>eZ Server Monitor - <?php echo Misc::getHostname(); ?></title>
     <link rel="stylesheet" href="web/css/utilities.css" type="text/css">
     <link rel="stylesheet" href="web/css/frontend.css" type="text/css">
     <!--[if IE]>
@@ -40,16 +40,16 @@ $update = $Config->checkUpdate();
 <nav role="main">
     <div id="appname">
         <a href="index.php"><span class="icon-gauge"></span>eSM</a>
-        <a href="<?= $Config->get('esm:website'); ?>"><span class="subtitle">eZ Server Monitor - v<?= $Config->get('esm:version'); ?></span></a>
+        <a href="<?php echo $Config->get('esm:website'); ?>"><span class="subtitle">eZ Server Monitor - v<?php echo $Config->get('esm:version'); ?></span></a>
     </div>
 
     <div id="hostname">
-        <?= Misc::getHostname(); ?> - <?= Misc::getLanIP(); ?>
+        <?php echo Misc::getHostname(); ?> - <?php echo Misc::getLanIP(); ?>
     </div>
 
     <?php if (!is_null($update)): ?>
         <div id="update">
-            <a href="<?= $update['fullpath']; ?>">New version available (<?= $update['availableVersion']; ?>) ! Click here to download</a>
+            <a href="<?php echo $update['fullpath']; ?>">New version available (<?php echo $update['availableVersion']; ?>) ! Click here to download</a>
         </div>
     <?php endif; ?>
 

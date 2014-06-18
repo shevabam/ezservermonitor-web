@@ -3,7 +3,7 @@ require 'Utils/Misc.class.php';
 
 $datas = array();
 
-if (!(exec('/sbin/ifconfig | awk -F "  " \'{print $1}\' | sed -e \'/^$/d\'', $getInterfaces)))
+if (!(exec('/sbin/ifconfig |awk -F \'[/  |: ]\' \'{print $1}\' |sed -e \'/^$/d\'', $getInterfaces)))
 {
     $datas[] = array('interface' => 'N.A', 'ip' => 'N.A');
 }

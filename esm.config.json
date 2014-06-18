@@ -1,7 +1,10 @@
 {
     "esm": {
-        "version": "2.0",
+        "version": "2.1",
         "website": "http://www.ezservermonitor.com"
+    },
+    "disk": {
+        "show_tmpfs": false
     },
     "ping": {
         "hosts": [
@@ -16,18 +19,22 @@
     "services": [
         {
             "name": "Web Server (Apache)",
+            "host": "localhost",
             "port": 80
         },
         {
             "name": "FTP Server (ProFTPd)",
+            "host": "localhost",
             "port": 21
         },
         {
             "name": "Databases (MySQL)",
+            "host": "localhost",
             "port": 3306
         },
         {
             "name": "SSH",
+            "host": "localhost",
             "port": 22
         }
     ]

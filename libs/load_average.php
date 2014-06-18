@@ -1,21 +1,25 @@
 <?php
 
-if (!($load_tmp = shell_exec('/bin/cat /proc/loadavg | /usr/bin/awk \'{print $1","$2","$3}\'')))
+if (!($load_tmp = shell_exec('cat /proc/loadavg | awk \'{print $1","$2","$3}\'')))
 {
     $load = array(0, 0, 0);
 }
 else
 {
+    // Number of cores
+    $cores = (int)shell_exec('grep -c ^processor /proc/cpuinfo');
+
     $load_exp = explode(',', $load_tmp);
 
     $load = array_map(
-        function ($value) {
-            $v = (int)($value * 100);
+        function ($value, $cores) {
+            $v = (int)($value * 100 / $cores);
             if ($v > 100)
                 $v = 100;
             return $v;
         }, 
-        $load_exp
+        $load_exp,
+        array_fill(0, 3, $cores)
     );
 }
 
