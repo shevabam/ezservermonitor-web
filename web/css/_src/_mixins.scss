@@ -1,0 +1,36 @@
+@mixin debug($color: red) {
+    border: 1px solid $color;
+}
+
+@mixin clearfix {
+    zoom:1;
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin letterpress($opacity) {
+    text-shadow: rgba(255, 255, 255, $opacity) 0 1px 0;
+}
+
+@mixin hide-text {
+    font: 0/0 a;
+    text-shadow: none;
+    color: transparent;
+}
+
+@mixin link-colors($normal, $hover: $normal, $visited: $normal) {
+    color: $normal;
+    &:hover, &:focus {
+        color: $hover;
+    }
+    &:visited {
+        color: $visited;
+    }
+}

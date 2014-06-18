@@ -1,0 +1,241 @@
+@charset "UTF-8";
+@import "compass";
+@import "_config.frontend";
+
+html {
+    height: 100%;
+}
+
+body {
+	font-size: 14px;
+	font-family: OpenSans-Light, Verdana, sans-serif, Arial;
+	margin: 0 auto;
+	color: $text-color;
+    background-color: $layout-bg-color;
+}
+
+a {
+    color: $main-color;
+    
+    &:hover {
+        color: lighten($main-color, 5%);
+        text-decoration: none;
+    }
+}
+
+::-moz-selection {
+    background-color: darken($main-color, 10%);
+    color: lighten($main-color, 30%);
+}
+::selection {
+    background-color: darken($main-color, 10%);
+    color: lighten($main-color, 30%);
+}
+
+/* --------------------- */
+/*  ==     NAVBAR        */
+/* --------------------- */
+
+nav[role="main"] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: $main-color;
+    height: $navbar-height;
+    width: 100%;
+    padding-left: 5px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    z-index: 2;
+    
+    #appname {
+        float: left;
+        width: 120px;
+        text-align: left;
+        
+        a {
+            color: #fff;
+            text-decoration: none;
+            
+            &:first-child {
+                font-size: 24px;
+                
+                span[class^="icon-"] {
+                    font-size: 30px;
+                    margin-right: 10px;
+                }
+            }
+
+            &:last-child {
+                display: block;
+                font-size: 11px;
+                font-style: italic;
+            }
+        }
+    }
+
+    #hostname {
+        float: left;
+        margin-left: 110px;
+        line-height: $navbar-height;
+    }
+
+    #update {
+        float: left;
+        margin-left: 100px;
+        line-height: $navbar-height;
+        font-size: 13px;
+        
+        a {
+            color: #fff;
+        }
+    }
+    
+    > ul {
+        text-align: right;
+        list-style-type: none;
+        
+        > li {
+            display: inline-block;
+            
+            > a {
+                display: inline-block;
+                padding: (($navbar-height / 2) - 17px) 15px;
+                color: #fff;
+                text-decoration: none;
+                @include transition(background 300ms ease-in-out);
+                
+                &:hover {
+                    background: lighten($main-color, 6%);
+                    @include transition(background 300ms ease-in-out);
+                }
+
+                > span[class^="icon-"] {
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+}
+
+
+
+/* ------------------- */
+/*  ==     MAIN        */
+/* ------------------- */
+
+#main-container {
+    overflow: auto;
+    margin-top: $navbar-height;
+    background-color: $layout-bg-color;
+    padding: 20px 25px;
+}
+
+
+
+/* ---------------------- */
+/*  ==     Listing        */
+/* ---------------------- */
+ul.list {
+    margin-left: 20px;
+    list-style-type: none;
+    
+    li {
+        position: relative;
+        padding-left: 12px;
+        
+        &:before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background-color: $main-color;
+            position: absolute;
+            left: 0;
+            top: 9px;
+        }
+    }
+}
+
+
+
+/* --------------------- */
+/*  ==     Tables        */
+/* --------------------- */
+table:not(.no-style) {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 13px;
+
+    tr {
+        border-bottom: 1px solid #ebebeb;
+        border-top: 1px solid #fff;
+    }
+    thead tr {
+        border-top: none;
+    }
+    tbody tr:last-child {
+        border-bottom: none;
+    }
+    tbody tr:nth-child(odd) {
+        background: #f2f2f2;
+    }
+    tbody tr td, thead tr th {
+        padding: 6px 8px;
+        position: relative;
+        text-align: left;
+    }
+    tbody tr td:last-child, thead tr th:last-child {
+        border-right: none;
+    }
+    tbody tr td:first-child, thead tr th:first-child {
+        border-left: none;
+    }
+    thead {
+        color: #898989;
+        font-size: 13px;
+        font-weight: bold;
+        
+        tr th {
+            text-align: center;
+        }
+    }
+    tbody tr:hover {
+        background: lighten($main-color, 25%);
+    }
+}
+
+table.firstBold tbody tr td:first-child {
+    font-weight: bold;
+    color: lighten($text-color, 20%);
+}
+
+
+/* --------------------------- */
+/*  ==     Progress bar        */
+/* --------------------------- */
+
+.progressbar-wrap {
+    width: 100%;
+    background-color: rgba($main-color, 0.2);
+
+    .progressbar {
+        text-indent: 5px;
+        
+        &.green { background-color: #7BCE6C; }
+        &.orange { background-color: #E3BB80; }
+        &.red { background-color: #CF6B6B; }
+    }
+}
+
+
+/* --------------------------- */
+/*  ==     Load Average        */
+/* --------------------------- */
+.box#esm-load_average {
+    h3 {
+        font-weight: normal;
+    }
+}

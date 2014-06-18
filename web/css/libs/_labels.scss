@@ -1,0 +1,25 @@
+@import "compass";
+
+span.label {
+    padding: 1px 3px 2px;
+    font-size: $label-font-size;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    white-space: nowrap;
+    background-color: $label-default;
+    @include border-radius($label-border-radius);
+
+    &.success {
+        background-color: $label-success;
+    }
+    &.warning {
+        background-color: $label-warning;
+    }
+    &.important, &.error {
+        background-color: $label-important;
+    }
+    &.notice {
+        background-color: $label-notice;
+    }
+}

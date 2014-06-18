@@ -1,0 +1,34 @@
+{
+    "esm": {
+        "version": "2.0",
+        "website": "http://www.ezservermonitor.com"
+    },
+    "ping": {
+        "hosts": [
+            "free.fr",
+            "orange.fr",
+            "google.com"
+        ]
+    },
+    "last_login": {
+        "max": 5
+    },
+    "services": [
+        {
+            "name": "Web Server (Apache)",
+            "port": 80
+        },
+        {
+            "name": "FTP Server (ProFTPd)",
+            "port": 21
+        },
+        {
+            "name": "Databases (MySQL)",
+            "port": 3306
+        },
+        {
+            "name": "SSH",
+            "port": 22
+        }
+    ]
+}

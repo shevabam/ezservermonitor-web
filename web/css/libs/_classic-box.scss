@@ -1,0 +1,94 @@
+@import "compass";
+
+.box {
+    background: $classic-box-background;
+    box-shadow: 3px 3px 0 rgba($classic-box-border, .6);
+    margin-bottom: 15px;
+    border: 1px solid $classic-box-border;
+    padding: 2px;
+
+    .box-header {
+        background-color: $classic-box-color;
+        height: $classic-box-header-height;
+        
+        h1 {
+            color: $classic-box-title-color;
+            float: left;
+            font-size: $classic-box-title-fontsize;
+            font-weight: bold;
+            line-height: $classic-box-header-height - 2px;
+            padding-left: 10px;
+            text-transform: uppercase;
+            /*text-shadow: rgba(0, 0, 0, 1) 0 1px 0;*/
+            
+            &:first-letter {
+                font-size: $classic-box-title-fontsize + 6px;
+            }
+        }
+        ul {
+            float: right;
+            list-style-type: none;
+            
+            li {
+                display: inline;
+                margin-left: -3px;
+                
+                a {
+                    color: lighten($classic-box-title-color, 10%);
+                    font-size: $classic-box-title-fontsize + 6px;
+                    line-height: $classic-box-header-height;
+                    padding: 4px 10px;
+                    
+                    text-decoration: none;
+                    
+                    &:hover:not(.disabled) {
+                        background: lighten($classic-box-color, 20%);
+                        color: $classic-box-color !important;
+                    }
+
+                    &.disabled {
+                        opacity: .4;
+                        
+                        &:hover {
+                            cursor: default;
+                        }
+                    }
+                }
+
+                &:first-child {
+                    margin-left: 0;
+                }
+                &:last-child a {
+                    border-right: none;
+                }
+                &.active a {
+                    background: #fafafa;
+                    cursor: default;
+                }
+            }
+        }
+    }
+
+    .box-content {
+        padding: 6px;
+        
+        table a {
+            text-decoration: none;
+            color: $classic-box-color;
+            
+            &:hover {
+                color: lighten($classic-box-color, 20%);
+            }
+        }
+    }
+
+    .box-footer {
+        background: #e8e8e8;
+        padding: 7px;
+        
+        span[class^="icon-"] {
+            font-size: 14px;
+            margin-right: 5px;
+        }
+    }
+}
