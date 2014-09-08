@@ -97,7 +97,7 @@ $update = $Config->checkUpdate();
                         <td id="system-current_users"></td>
                     </tr>
                     <tr>
-                        <td>Server datetime</td>
+                        <td>Server date & time</td>
                         <td id="system-server_date"></td>
                     </tr>
                 </tbody>
@@ -149,15 +149,15 @@ $update = $Config->checkUpdate();
                         <td id="cpu-model"></td>
                     </tr>
                     <tr>
-                        <td>Cores #</td>
+                        <td>Cores</td>
                         <td id="cpu-num_cores"></td>
                     </tr>
                     <tr>
-                        <td>CPU Speed</td>
+                        <td>Speed</td>
                         <td id="cpu-frequency"></td>
                     </tr>
                     <tr>
-                        <td>Cache L2</td>
+                        <td>Cache</td>
                         <td id="cpu-cache"></td>
                     </tr>
                     <tr>
@@ -240,19 +240,19 @@ $update = $Config->checkUpdate();
             <table class="firstBold">
                 <tbody>
                     <tr>
-                        <td class="w20p">Used RAM</td>
+                        <td class="w20p">Used</td>
                         <td><div class="progressbar-wrap"><div class="progressbar" style="width: 0%;">0%</div></div></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Used RAM</td>
+                        <td class="w20p">Used</td>
                         <td id="memory-used"></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Free RAM</td>
+                        <td class="w20p">Free</td>
                         <td id="memory-free"></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Total RAM</td>
+                        <td class="w20p">Total</td>
                         <td id="memory-total"></td>
                     </tr>
                 </tbody>
@@ -272,19 +272,19 @@ $update = $Config->checkUpdate();
             <table class="firstBold">
                 <tbody>
                     <tr>
-                        <td class="w20p">Used Swap</td>
+                        <td class="w20p">Used</td>
                         <td><div class="progressbar-wrap"><div class="progressbar" style="width: 0%;">0%</div></div></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Used Swap</td>
+                        <td class="w20p">Used</td>
                         <td id="swap-used"></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Free Swap</td>
+                        <td class="w20p">Free</td>
                         <td id="swap-free"></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Total Swap</td>
+                        <td class="w20p">Total</td>
                         <td id="swap-total"></td>
                     </tr>
                 </tbody>
