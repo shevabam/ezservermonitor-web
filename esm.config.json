@@ -8,9 +8,9 @@
     },
     "ping": {
         "hosts": [
-            "free.fr",
-            "orange.fr",
-            "google.com"
+            "facebook.com",
+            "google.com",
+            "yahoo.com"
         ]
     },
     "last_login": {
@@ -18,22 +18,32 @@
     },
     "services": [
         {
-            "name": "Web Server (Apache)",
+            "name": "Web Server",
             "host": "localhost",
             "port": 80
         },
         {
-            "name": "FTP Server (ProFTPd)",
+            "name": "Email Server (incoming)",
+            "host": "localhost",
+            "port": 993
+        },
+        {
+            "name": "Email Server (outgoing)",
+            "host": "localhost",
+            "port": 587
+        },
+        {
+            "name": "FTP Server",
             "host": "localhost",
             "port": 21
         },
         {
-            "name": "Databases (MySQL)",
+            "name": "Database Server",
             "host": "localhost",
             "port": 3306
         },
         {
-            "name": "SSH",
+            "name": "SSH Service",
             "host": "localhost",
             "port": 22
         }
