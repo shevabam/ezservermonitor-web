@@ -78,7 +78,7 @@ class Config
     public function checkUpdate()
     {
         if ($this->get('esm:check_updates') === false)
-            return false;
+            return null;
         
         $response       = null;
         $this_version   = $this->get('esm:version');
