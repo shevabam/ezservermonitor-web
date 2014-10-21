@@ -1,7 +1,9 @@
 {
     "esm": {
-        "version": "2.1",
-        "website": "http://www.ezservermonitor.com"
+        "version": "2.2",
+        "website": "http://www.ezservermonitor.com",
+        "check_updates": true,
+        "auto_refresh": 0
     },
     "disk": {
         "show_tmpfs": false

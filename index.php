@@ -8,6 +8,9 @@ $update = $Config->checkUpdate();
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <?php if ($Config->get('esm:auto_refresh') > 0): ?>
+        <meta http-equiv="refresh" content="<?php echo $Config->get('esm:auto_refresh'); ?>">
+    <?php endif; ?>
     <title>eZ Server Monitor - <?php echo Misc::getHostname(); ?></title>
     <link rel="stylesheet" href="web/css/utilities.css" type="text/css">
     <link rel="stylesheet" href="web/css/frontend.css" type="text/css">
