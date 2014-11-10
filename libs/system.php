@@ -7,9 +7,12 @@ $hostname = php_uname('n');
 // OS
 if (!($os = shell_exec('/usr/bin/lsb_release -ds')))
 {
-    if (!($os = shell_exec('find /etc/*-release -type f -exec cat {} \; | grep NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
+    if(!($os = shell_exec('cat /etc/system-release'))) 
     {
-        $os = 'N.A';
+        if (!($os = shell_exec('find /etc/*-release -type f -exec cat {} \; | grep NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
+        {
+            $os = 'N.A';
+        }
     }
 }
 
