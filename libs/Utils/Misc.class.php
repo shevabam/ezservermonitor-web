@@ -17,7 +17,7 @@ class Misc
                 break;
         }
         
-        return round($filesize, $precision).' '.$units[$idUnit].'o';
+        return round($filesize, $precision).' '.$units[$idUnit].'B';
     }
 
     

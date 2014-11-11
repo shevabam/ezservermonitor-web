@@ -11,9 +11,11 @@ $update = $Config->checkUpdate();
     <?php if ($Config->get('esm:auto_refresh') > 0): ?>
         <meta http-equiv="refresh" content="<?php echo $Config->get('esm:auto_refresh'); ?>">
     <?php endif; ?>
+    <meta name="viewport" content="width=device-width,initial-scale=1" /> 
     <title>eZ Server Monitor - <?php echo Misc::getHostname(); ?></title>
     <link rel="stylesheet" href="web/css/utilities.css" type="text/css">
     <link rel="stylesheet" href="web/css/frontend.css" type="text/css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -117,17 +119,17 @@ $update = $Config->checkUpdate();
         </div>
 
         <div class="box-content t-center">
-            <div class="f-left w180">
+            <div class="f-left" style="width: 33%;">
                 <h3>1 min</h3>
                 <input type="text" class="gauge" id="load-average_1" value="0" data-height="100" data-width="150" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
             </div>
 
-            <div class="f-right w180">
+            <div class="f-right" style="width: 33%;">
                 <h3>15 min</h3>
                 <input type="text" class="gauge" id="load-average_15" value="0" data-height="100" data-width="150" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
             </div>
 
-            <div class="t-center" style="margin: 0 180px;">
+            <div class="t-center" style="/*margin: 0 180px;*/">
                 <h3>5 min</h3>
                 <input type="text" class="gauge" id="load-average_5" value="0" data-height="100" data-width="150" data-min="0" data-max="100" data-readOnly="true" data-fgColor="#BED7EB" data-angleOffset="-90" data-angleArc="180">
             </div>

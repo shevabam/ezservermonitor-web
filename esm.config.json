@@ -1,6 +1,6 @@
 {
     "esm": {
-        "version": "2.2",
+        "version": "2.3",
         "website": "http://www.ezservermonitor.com",
         "check_updates": true,
         "auto_refresh": 0

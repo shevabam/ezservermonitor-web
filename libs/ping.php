@@ -14,6 +14,11 @@ foreach ($hosts as $host)
 {
     exec('/bin/ping -qc 1 '.$host.' | awk -F/ \'/^rtt/ { print $5 }\'', $result);
 
+    if (!isset($result[0]))
+    {
+        $result[0] = 0;
+    }
+    
     $datas[] = array(
         'host' => $host,
         'ping' => $result[0],
