@@ -59,14 +59,9 @@ else
 }
 
 // Current users
-if (!($current_users_cmd = shell_exec('who -q')))
+if (!($current_users = shell_exec('who -u | awk \'{ print $1 }\' | wc -l')))
 {
     $current_users = 'N.A';
-}
-else
-{
-    $arr_user = explode('=', $current_users_cmd);
-    $current_users = $arr_user[1];
 }
 
 // Server datetime
