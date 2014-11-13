@@ -1,14 +1,14 @@
 <?php
-require 'Utils/Misc.class.php';
+require 'Utils/changeServer.php';
 
 // Free
-if (!($free = shell_exec('/usr/bin/free -to | grep Mem: | awk \'{print $4+$6+$7}\'')))
+if (!($free = Misc::execShellServer('/usr/bin/free -to | grep Mem: | awk \'{print $4+$6+$7}\'')))
 {
     $free = 0;
 }
 
 // Total
-if (!($total = shell_exec('/usr/bin/free -to | grep Mem: | awk \'{print $2}\'')))
+if (!($total = Misc::execShellServer('/usr/bin/free -to | grep Mem: | awk \'{print $2}\'')))
 {
     $total = 0;
 }

@@ -50,7 +50,6 @@ class Config
         return $tab == $this->config ? null : $tab;
     }
     
-    
     /**
      * Returns all config variables
      */

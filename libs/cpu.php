@@ -1,14 +1,14 @@
 <?php
-
+require 'Utils/changeServer.php';
 // Number of cores
-if (!($num_cores = shell_exec('/bin/grep -c ^processor /proc/cpuinfo')))
+if (!($num_cores = Misc::execShellServer('/bin/grep -c ^processor /proc/cpuinfo')))
 {
     $num_cores = 'N.A';
 }
 
 
 // CPU info
-if (!($cpuinfo = shell_exec('cat /proc/cpuinfo')))
+if (!($cpuinfo = Misc::execShellServer('cat /proc/cpuinfo')))
 {
     $model      = 'N.A';
     $frequency  = 'N.A';

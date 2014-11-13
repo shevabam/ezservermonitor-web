@@ -1,11 +1,13 @@
 <?php
-require 'Utils/Misc.class.php';
-require 'Utils/Config.class.php';
+require 'Utils/changeServer.php';
 $Config = new Config();
 
 $datas = array();
 
-if (!(exec('/bin/df -T | awk -v c=`/bin/df -T | grep -bo "Type" | awk -F: \'{print $1}\'` \'{print substr($0,c);}\' | tail -n +2 | awk \'{print $1","$2","$3","$4","$5","$6}\'', $df)))
+$cmd = '/bin/df -T | awk \'{print $2","$3","$4","$5","$6","$7}\' | sed \'1d\'';
+$df = Misc::execServer($cmd);
+//echo "<pre>"; var_export($df); flush(); echo "</pre>";
+if (!$df)
 {
     $datas[] = array(
         'total'         => 'N.A',
@@ -23,8 +25,9 @@ else
     {
         list($type, $total, $used, $free, $percent, $mount) = explode(',', $mounted);
 
-        if (strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false)
+        if ((strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false) || (strpos($type, 'fuse') !== false)) {
             continue;
+        }
 
         if (!in_array($mount, $mounted_points))
         {
@@ -41,6 +44,5 @@ else
     }
 
 }
-
 
 echo json_encode($datas);

@@ -1,13 +1,13 @@
 <?php
-
-if (!($load_tmp = shell_exec('cat /proc/loadavg | awk \'{print $1","$2","$3}\'')))
+require 'Utils/changeServer.php';
+if (!($load_tmp = Misc::execShellServer('cat /proc/loadavg | awk \'{print $1","$2","$3}\'')))
 {
     $load = array(0, 0, 0);
 }
 else
 {
     // Number of cores
-    $cores = (int)shell_exec('grep -c ^processor /proc/cpuinfo');
+    $cores = (int)Misc::execShellServer('grep -c ^processor /proc/cpuinfo');
 
     $load_exp = explode(',', $load_tmp);
 

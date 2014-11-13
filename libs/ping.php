@@ -1,5 +1,5 @@
 <?php
-require 'Utils/Config.class.php';
+require 'Utils/changeServer.php';
 $Config = new Config();
 
 
@@ -12,7 +12,7 @@ else
 
 foreach ($hosts as $host)
 {
-    exec('/bin/ping -qc 1 '.$host.' | awk -F/ \'/^rtt/ { print $5 }\'', $result);
+    $result = Misc::execServer('/bin/ping -qc 1 '.$host.' | awk -F/ \'/^rtt/ { print $5 }\'');
 
     if (!isset($result[0]))
     {

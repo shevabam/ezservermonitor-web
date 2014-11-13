@@ -8,6 +8,11 @@
     "disk": {
         "show_tmpfs": false
     },
+    "servers": {
+        "hosts": [
+            "localhost"
+        ]
+    },
     "ping": {
         "hosts": [
             "facebook.com",

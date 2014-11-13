@@ -1,15 +1,15 @@
 <?php
-require 'libs/Utils/Misc.class.php';
-require 'libs/Utils/Config.class.php';
-$Config = new Config();
-$update = $Config->checkUpdate();
+
+require 'libs/Utils/changeServer.php';
+$config = new Config();
+$update = $config->checkUpdate();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php if ($Config->get('esm:auto_refresh') > 0): ?>
-        <meta http-equiv="refresh" content="<?php echo $Config->get('esm:auto_refresh'); ?>">
+    <?php if ($config->get('esm:auto_refresh') > 0): ?>
+        <meta http-equiv="refresh" content="<?php echo $config->get('esm:auto_refresh'); ?>">
     <?php endif; ?>
     <meta name="viewport" content="width=device-width,initial-scale=1" /> 
     <title>eZ Server Monitor - <?php echo Misc::getHostname(); ?></title>
@@ -45,11 +45,18 @@ $update = $Config->checkUpdate();
 <nav role="main">
     <div id="appname">
         <a href="index.php"><span class="icon-gauge"></span>eSM</a>
-        <a href="<?php echo $Config->get('esm:website'); ?>"><span class="subtitle">eZ Server Monitor - v<?php echo $Config->get('esm:version'); ?></span></a>
+        <a href="<?php echo $config->get('esm:website'); ?>"><span class="subtitle">eZ Server Monitor - v<?php echo $config->get('esm:version'); ?></span></a>
     </div>
 
+    <div id="serverChoice">
+        <select onchange="esm.changeServer(this.value)">
+            <?php echo Misc::getListServer(); ?>
+        </select>
+    </div>
+    
     <div id="hostname">
-        <?php echo Misc::getHostname(); ?> - <?php echo Misc::getLanIP(); ?>
+<!--        <?php echo Misc::getHostname(); ?> - <?php echo Misc::getLanIP(); ?> -->
+        <?php echo $_SESSION['server']; ?>
     </div>
 
     <?php if (!is_null($update)): ?>
@@ -170,31 +177,6 @@ $update = $Config->checkUpdate();
                         <td id="cpu-bogomips"></td>
                     </tr>
                 </tbody>
-            </table>
-        </div>
-    </div>
-
-
-
-    <div class="box column-left" id="esm-network">
-        <div class="box-header">
-            <h1>Network usage</h1>
-            <ul>
-                <li><a href="#" class="reload" onclick="esm.reloadBlock('network');"><span class="icon-cycle"></span></a></li>
-            </ul>
-        </div>
-
-        <div class="box-content">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="w15p">Interface</th>
-                        <th class="w20p">IP</th>
-                        <th>Receive</th>
-                        <th>Transmit</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
             </table>
         </div>
     </div>
@@ -357,6 +339,29 @@ $update = $Config->checkUpdate();
     
 
     <div class="cls"></div>
+    
+    <div class="box column-left" id="esm-network">
+        <div class="box-header">
+            <h1>Network usage</h1>
+            <ul>
+                <li><a href="#" class="reload" onclick="esm.reloadBlock('network');"><span class="icon-cycle"></span></a></li>
+            </ul>
+        </div>
+
+        <div class="box-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="w15p">Interface</th>
+                        <th class="w20p">IP</th>
+                        <th>Receive</th>
+                        <th>Transmit</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 
 </div>
 
