@@ -71,15 +71,17 @@ nav[role="main"] #appname a:last-child {
 }
 
 nav[role="main"] #hostname {
+    font-size: 20px;
+    font-weight: bold;
     float: left;
     margin-left: 400px;
-    line-height: 60px;
+    margin-top: 15px;
 }
 
 nav[role="main"] #serverChoice {
     float: left;
-    margin-left: 200px;
-    line-height: 60px;
+    margin-left: 70px;
+    margin-top: 15px;
 }
 
 nav[role="main"] #update {
@@ -236,3 +238,44 @@ table.firstBold tbody tr td:first-child {
 .box#esm-load_average h3 {
     font-weight: normal;
 }
+
+//css select
+/* -------------------- Page Styles (not required) */
+div { margin: 30px; }
+
+
+.styled-select {
+   background: url("/web/css/pict/arrow.png") no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.blue-styled {
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+}
+
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+/* -------------------- Colors: Background */
+.blue    { background-color: #7994b1; }
+
+/* -------------------- Colors: Text */
+.blue select    { color: #fff; }
+
+

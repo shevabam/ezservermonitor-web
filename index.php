@@ -48,13 +48,13 @@ $update = $config->checkUpdate();
         <a href="<?php echo $config->get('esm:website'); ?>"><span class="subtitle">eZ Server Monitor - v<?php echo $config->get('esm:version'); ?></span></a>
     </div>
 
-    <div id="serverChoice">
+    <div class="styled-select blue semi-square" id="serverChoice">
         <select onchange="esm.changeServer(this.value)">
             <?php echo Misc::getListServer(); ?>
         </select>
     </div>
     
-    <div id="hostname">
+    <div class="blue semi-square blue-styled" id="hostname">
 <!--        <?php echo Misc::getHostname(); ?> - <?php echo Misc::getLanIP(); ?> -->
         <?php echo $_SESSION['server']; ?>
     </div>
