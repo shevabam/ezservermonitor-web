@@ -1,12 +1,13 @@
 <?php
-require 'Utils/Misc.class.php';
+require 'Utils/changeServer.php';
 
 $datas   = array();
 $network = array();
 
-$ifconfig = trim(shell_exec('which ifconfig'));
+$ifconfig = trim(Misc::execShellServer('which ifconfig'));
+$cmd = $getInterfaces = Misc::execServer($ifconfig.' |awk -F \'[/ ]\' \'{print $1}\' |sed -e \'/^$/d\'');
 
-if (!(exec($ifconfig.' |awk -F \'[/  |: ]\' \'{print $1}\' |sed -e \'/^$/d\'', $getInterfaces)))
+if (!$cmd)
 {
     $datas[] = array('interface' => 'N.A', 'ip' => 'N.A');
 }
@@ -15,22 +16,22 @@ else
     foreach ($getInterfaces as $name)
     {
         $ip = null;
-        exec($ifconfig.' '.$name.' | awk \'/inet / {print $2}\' | cut -d \':\' -f2', $ip);
+        $ip = Misc::execShellServer($ifconfig.' '.$name.' | awk \'/inet / {print $2}\' | cut -d \':\' -f2');
 
         if (!isset($ip[0]))
             $ip[0] = '';
 
         $network[] = array(
             'name' => $name,
-            'ip'   => $ip[0],
+            'ip'   => is_array($ip) ? '' : trim($ip),
         );
     }
 
     foreach ($network as $interface)
     {
         // Get transmit and receive datas by interface
-        exec('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes', $getBandwidth_tx);
-        exec('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes', $getBandwidth_rx);
+        $getBandwidth_tx = Misc::execShellServer('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes');
+        $getBandwidth_rx = Misc::execShellServer('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes');
 
         $datas[] = array(
             'interface' => $interface['name'],

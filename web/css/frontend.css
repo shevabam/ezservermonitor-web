@@ -1,1 +1,281 @@
-html{height:100%}body{font-size:14px;font-family:OpenSans-Light, Verdana, sans-serif, Arial;margin:0 auto;color:#4d5157;background-color:#fff}a{color:#99aec4}a:hover{color:#a9bbcd;text-decoration:none}::-moz-selection{background-color:#7994b1;color:#fafbfc}::selection{background-color:#7994b1;color:#fafbfc}nav[role="main"]{position:fixed;top:0;left:0;right:0;background-color:#99aec4;height:60px;width:100%;padding-left:5px;color:#fff;font-size:16px;text-align:center;z-index:2}nav[role="main"] #appname{float:left;width:120px;text-align:left}nav[role="main"] #appname a{color:#fff;text-decoration:none}nav[role="main"] #appname a:first-child{font-size:24px}nav[role="main"] #appname a:first-child span[class^="icon-"]{font-size:30px;margin-right:10px}nav[role="main"] #appname a:last-child{display:block;font-size:11px;font-style:italic}nav[role="main"] #hostname{float:left;margin-left:110px;line-height:60px}nav[role="main"] #update{float:left;margin-left:100px;line-height:60px;font-size:13px}nav[role="main"] #update a{color:#fff}nav[role="main"]>ul{text-align:right;list-style-type:none}nav[role="main"]>ul>li{display:inline-block}nav[role="main"]>ul>li>a{display:inline-block;padding:13px 15px;color:#fff;text-decoration:none;-webkit-transition:background 300ms ease-in-out;-moz-transition:background 300ms ease-in-out;-o-transition:background 300ms ease-in-out;transition:background 300ms ease-in-out}nav[role="main"]>ul>li>a:hover{background:#acbdcf;-webkit-transition:background 300ms ease-in-out;-moz-transition:background 300ms ease-in-out;-o-transition:background 300ms ease-in-out;transition:background 300ms ease-in-out}nav[role="main"]>ul>li>a>span[class^="icon-"]{font-size:30px}#main-container{overflow:auto;margin-top:60px;background-color:#fff;padding:20px 25px}ul.list{margin-left:20px;list-style-type:none}ul.list li{position:relative;padding-left:12px}ul.list li:before{content:'';width:5px;height:5px;background-color:#99aec4;position:absolute;left:0;top:9px}table:not(.no-style){width:100%;border-collapse:collapse;border-spacing:0;font-size:13px}table:not(.no-style) tr{border-bottom:1px solid #ebebeb;border-top:1px solid #fff}table:not(.no-style) thead tr{border-top:none}table:not(.no-style) tbody tr:last-child{border-bottom:none}table:not(.no-style) tbody tr:nth-child(odd){background:#f2f2f2}table:not(.no-style) tbody tr td,table:not(.no-style) thead tr th{padding:6px 8px;position:relative;text-align:left}table:not(.no-style) tbody tr td:last-child,table:not(.no-style) thead tr th:last-child{border-right:none}table:not(.no-style) tbody tr td:first-child,table:not(.no-style) thead tr th:first-child{border-left:none}table:not(.no-style) thead{color:#898989;font-size:13px;font-weight:bold}table:not(.no-style) thead tr th{text-align:center}table:not(.no-style) tbody tr:hover{background:#eaeef3}table.firstBold tbody tr td:first-child{font-weight:bold;color:#7e848c}.progressbar-wrap{width:100%;background-color:rgba(153,174,196,0.2)}.progressbar-wrap .progressbar{text-indent:5px}.progressbar-wrap .progressbar.green{background-color:#7BCE6C}.progressbar-wrap .progressbar.orange{background-color:#E3BB80}.progressbar-wrap .progressbar.red{background-color:#CF6B6B}.box#esm-load_average h3{font-weight:normal}
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    font-family: OpenSans-Light,Verdana,sans-serif,Arial;
+    font-size: 14px;
+    color: #4d5157;
+    background-color: #fff;
+}
+
+a {
+    color: #99aec4;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #a9bbcd;
+}
+
+::-moz-selection {
+    color: #fafbfc;
+    background-color: #7994b1;
+}
+
+::selection {
+    color: #fafbfc;
+    background-color: #7994b1;
+}
+
+nav[role="main"] {
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    padding-left: 5px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    background-color: #99aec4;
+}
+
+nav[role="main"] #appname {
+    float: left;
+    width: 120px;
+    text-align: left;
+}
+
+nav[role="main"] #appname a {
+    text-decoration: none;
+    color: #fff;
+}
+
+nav[role="main"] #appname a:first-child {
+    font-size: 24px;
+}
+
+nav[role="main"] #appname a:first-child span[class^="icon-"] {
+    margin-right: 10px;
+    font-size: 30px;
+}
+
+nav[role="main"] #appname a:last-child {
+    display: block;
+    font-size: 11px;
+    font-style: italic;
+}
+
+nav[role="main"] #hostname {
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+    margin-left: 400px;
+    margin-top: 15px;
+}
+
+nav[role="main"] #serverChoice {
+    float: left;
+    margin-left: 70px;
+    margin-top: 15px;
+}
+
+nav[role="main"] #update {
+    float: left;
+    margin-left: 100px;
+    font-size: 13px;
+    line-height: 60px;
+}
+
+nav[role="main"] #update a {
+    color: #fff;
+}
+
+nav[role="main"]>ul {
+    text-align: right;
+    list-style-type: none;
+}
+
+nav[role="main"]>ul>li {
+    display: inline-block;
+}
+
+nav[role="main"]>ul>li>a {
+    display: inline-block;
+    padding: 13px 15px;
+    text-decoration: none;
+    color: #fff;
+    -webkit-transition: background 300ms ease-in-out;
+    -moz-transition: background 300ms ease-in-out;
+    -o-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+nav[role="main"]>ul>li>a:hover {
+    background: #acbdcf;
+    -webkit-transition: background 300ms ease-in-out;
+    -moz-transition: background 300ms ease-in-out;
+    -o-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+nav[role="main"]>ul>li>a>span[class^="icon-"] {
+    font-size: 30px;
+}
+
+#main-container {
+    margin-top: 60px;
+    padding: 20px 25px;
+    overflow: auto;
+    background-color: #fff;
+}
+
+ul.list {
+    margin-left: 20px;
+    list-style-type: none;
+}
+
+ul.list li {
+    position: relative;
+    padding-left: 12px;
+}
+
+ul.list li:before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    background-color: #99aec4;
+}
+
+table:not(.no-style) {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 13px;
+}
+
+table:not(.no-style) tr {
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #ebebeb;
+}
+
+table:not(.no-style) thead tr {
+    border-top: none;
+}
+
+table:not(.no-style) tbody tr:last-child {
+    border-bottom: none;
+}
+
+table:not(.no-style) tbody tr:nth-child(odd) {
+    background: #f2f2f2;
+}
+
+table:not(.no-style) tbody tr td,
+table:not(.no-style) thead tr th {
+    position: relative;
+    padding: 6px 8px;
+    text-align: left;
+}
+
+table:not(.no-style) tbody tr td:last-child,
+table:not(.no-style) thead tr th:last-child {
+    border-right: none;
+}
+
+table:not(.no-style) tbody tr td:first-child,
+table:not(.no-style) thead tr th:first-child {
+    border-left: none;
+}
+
+table:not(.no-style) thead {
+    font-size: 13px;
+    font-weight: bold;
+    color: #898989;
+}
+
+table:not(.no-style) thead tr th {
+    text-align: center;
+}
+
+table:not(.no-style) tbody tr:hover {
+    background: #eaeef3;
+}
+
+table.firstBold tbody tr td:first-child {
+    font-weight: bold;
+    color: #7e848c;
+}
+
+.progressbar-wrap {
+    width: 100%;
+    background-color: rgba(153,174,196,0.2);
+}
+
+.progressbar-wrap .progressbar {
+    text-indent: 5px;
+}
+
+.progressbar-wrap .progressbar.green {
+    background-color: #7BCE6C;
+}
+
+.progressbar-wrap .progressbar.orange {
+    background-color: #E3BB80;
+}
+
+.progressbar-wrap .progressbar.red {
+    background-color: #CF6B6B;
+}
+
+.box#esm-load_average h3 {
+    font-weight: normal;
+}
+
+//css select
+/* -------------------- Page Styles (not required) */
+div { margin: 30px; }
+
+
+.styled-select {
+   background: url("/web/css/pict/arrow.png") no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.blue-styled {
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+}
+
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+/* -------------------- Colors: Background */
+.blue    { background-color: #7994b1; }
+
+/* -------------------- Colors: Text */
+.blue select    { color: #fff; }
+
+

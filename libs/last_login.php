@@ -1,11 +1,11 @@
 <?php
-require 'Utils/Config.class.php';
+require 'Utils/changeServer.php';
 $Config = new Config();
 
 
 $datas = array();
 
-if (!(exec('/usr/bin/lastlog --time 365 | /usr/bin/awk \'{print $1","$3","$4" "$5" "$6" "$7" "$8}\'', $users)))
+if (!($users = Misc::execServer('/usr/bin/lastlog --time 365 | /usr/bin/awk \'{print $1","$3","$4" "$5" "$6" "$7" "$8}\'')))
 {
     $datas[] = array(
         'user' => 'N.A',
