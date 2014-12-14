@@ -46,6 +46,7 @@ else
                 break;
 
                 case 'bogomips':
+                case 'BogoMIPS':
                     $bogomips = $value;
                 break;
             }
