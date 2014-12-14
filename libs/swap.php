@@ -2,23 +2,32 @@
 require 'Utils/Misc.class.php';
 
 // Free
-if (!($free = shell_exec('grep SwapFree /proc/meminfo | awk \'{print $2}\'')))
+if (!($free = shell_exec('/usr/bin/free -t | sed -n \'3p\' | awk \'{print $5}\'')))
 {
     $free = 0;
 }
 
 // Total
-if (!($total = shell_exec('grep SwapTotal /proc/meminfo | awk \'{print $2}\'')))
+if (!($total = shell_exec('/usr/bin/free -t | sed -n \'3p\' | awk \'{print $3}\'')))
 {
     $total = 0;
 }
 
 // Used
-$used = $total - $free;
+if (!($used = shell_exec('/usr/bin/free -t | sed -n \'3p\' | awk \'{print $4}\'')))
+{
+    $used = 0;
+}
 
 // Percent used
-$percent_used = 100 - (round($free / $total * 100));
-
+if ($total == 0)
+{
+    $percent_used = 0;
+}
+else
+{
+    $percent_used = 100 - (round($free / $total * 100));
+}
 
 $datas = array(
     'used'          => Misc::getSize($used * 1024),
