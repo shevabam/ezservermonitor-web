@@ -1,12 +1,70 @@
 <?php
 require 'Utils/Misc.class.php';
 
-$datas   = array();
-$network = array();
+$datas    = array();
+$network  = array();
 
-$ifconfig = trim(shell_exec('which ifconfig'));
 
-if (!(exec($ifconfig.' |awk -F \'[/  |: ]\' \'{print $1}\' |sed -e \'/^$/d\'', $getInterfaces)))
+// Possible commands for ifconfig and ip
+$commands = array(
+    'ifconfig' => array('ifconfig', '/sbin/ifconfig', '/usr/bin/ifconfig', '/usr/sbin/ifconfig'),
+    'ip'       => array('ip', '/bin/ip', '/sbin/ip', '/usr/bin/ip', '/usr/sbin/ip'),
+);
+
+// Returns command line for retreive interfaces
+function getInterfacesCommand($commands)
+{
+    $ifconfig = Misc::whichCommand($commands['ifconfig'], ' | awk -F \'[/  |: ]\' \'{print $1}\' | sed -e \'/^$/d\'');
+
+    if (!empty($ifconfig))
+    {
+        return $ifconfig;
+    }
+    else
+    {
+        $ip_cmd = Misc::whichCommand($commands['ip'], ' -V', false);
+
+        if (!empty($ip_cmd))
+        {
+            return $ip_cmd.' -oneline link show | awk \'{print $2}\' | sed "s/://"';
+        }
+        else
+        {
+            return null;
+        }
+    }
+}
+
+// Returns command line for retreive IP address from interface name
+function getIpCommand($commands, $interface)
+{
+    $ifconfig = Misc::whichCommand($commands['ifconfig'], ' '.$interface.' | awk \'/inet / {print $2}\' | cut -d \':\' -f2');
+
+    if (!empty($ifconfig))
+    {
+        return $ifconfig;
+    }
+    else
+    {
+        $ip_cmd = Misc::whichCommand($commands['ip'], ' -V', false);
+
+        if (!empty($ip_cmd))
+        {
+            return 'for family in inet inet6; do '.
+               $ip_cmd.' -oneline -family $family addr show '.$interface.' | grep -v fe80 | awk \'{print $4}\' | sed "s/\/.*//"; ' .
+            'done';
+        }
+        else
+        {
+            return null;
+        }
+    }
+}
+
+
+$getInterfaces_cmd = getInterfacesCommand($commands);
+
+if (is_null($getInterfaces_cmd) || !(exec($getInterfaces_cmd, $getInterfaces)))
 {
     $datas[] = array('interface' => 'N.A', 'ip' => 'N.A');
 }
@@ -15,15 +73,26 @@ else
     foreach ($getInterfaces as $name)
     {
         $ip = null;
-        exec($ifconfig.' '.$name.' | awk \'/inet / {print $2}\' | cut -d \':\' -f2', $ip);
 
-        if (!isset($ip[0]))
-            $ip[0] = '';
+        $getIp_cmd = getIpCommand($commands, $name);        
 
-        $network[] = array(
-            'name' => $name,
-            'ip'   => $ip[0],
-        );
+        if (is_null($getIp_cmd) || !(exec($getIp_cmd, $ip)))
+        {
+            $network[] = array(
+                'name' => $name,
+                'ip'   => 'N.A',
+            );
+        }
+        else
+        {
+            if (!isset($ip[0]))
+                $ip[0] = '';
+
+            $network[] = array(
+                'name' => $name,
+                'ip'   => $ip[0],
+            );
+        }
     }
 
     foreach ($network as $interface)
