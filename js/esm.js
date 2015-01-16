@@ -145,7 +145,6 @@ esm.getLast_login = function() {
             var html = '';
             html += '<tr>';
             html += '<td>'+data[line].user+'</td>';
-            html += '<td>'+data[line].host+'</td>';
             html += '<td class="w50p">'+data[line].date+'</td>';
             html += '</tr>';
 

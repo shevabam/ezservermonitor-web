@@ -2,24 +2,24 @@
 
 class Misc
 {
-	/**
-	 * Returns human size
-	 */
+    /**
+     * Returns human size
+     */
     public static function getSize($filesize, $precision = 2)
     {
         $units = array('', 'K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y');
-        
+
         foreach ($units as $idUnit => $unit)
         {
             if ($filesize > 1024)
-                $filesize /= 1024; 
+                $filesize /= 1024;
             else
                 break;
         }
         
         return round($filesize, $precision).' '.$units[$idUnit].'B';
     }
-
+    
     
     /**
      * Returns hostname
@@ -27,6 +27,26 @@ class Misc
     public static function getHostname()
     {
         return php_uname('n');
+    }
+
+
+    /**
+     * Returns CPU cores number
+     */
+    public static function getCpuCoresNumber()
+    {
+        if (!($num_cores = shell_exec('/bin/grep -c ^processor /proc/cpuinfo')))
+        {
+            if (!($num_cores = trim(shell_exec('/usr/bin/nproc'))))
+            {
+                $num_cores = 1;
+            }
+        }
+
+        if ((int)$num_cores <= 0)
+            $num_cores = 1;
+
+        return (int)$num_cores;
     }
 
 

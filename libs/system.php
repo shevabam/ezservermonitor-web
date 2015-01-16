@@ -15,6 +15,7 @@ if (!($os = shell_exec('/usr/bin/lsb_release -ds')))
         }
     }
 }
+$os = trim($os, '"');
 
 // Kernel
 if (!($kernel = shell_exec('/bin/uname -r')))

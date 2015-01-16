@@ -1,4 +1,5 @@
 <?php
+require 'Utils/Misc.class.php';
 
 if (!($load_tmp = shell_exec('cat /proc/loadavg | awk \'{print $1","$2","$3}\'')))
 {
@@ -7,7 +8,7 @@ if (!($load_tmp = shell_exec('cat /proc/loadavg | awk \'{print $1","$2","$3}\'')
 else
 {
     // Number of cores
-    $cores = (int)shell_exec('grep -c ^processor /proc/cpuinfo');
+    $cores = Misc::getCpuCoresNumber();
 
     $load_exp = explode(',', $load_tmp);
 

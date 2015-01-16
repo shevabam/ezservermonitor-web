@@ -1,21 +1,17 @@
 <?php
+require 'Utils/Misc.class.php';
 
 // Number of cores
-if (!($num_cores = shell_exec('/bin/grep -c ^processor /proc/cpuinfo')))
-{
-    $num_cores = 'N.A';
-}
+$num_cores = Misc::getCpuCoresNumber();
 
 
 // CPU info
-if (!($cpuinfo = shell_exec('cat /proc/cpuinfo')))
-{
-    $model      = 'N.A';
-    $frequency  = 'N.A';
-    $cache      = 'N.A';
-    $bogomips   = 'N.A';
-}
-else
+$model      = 'N.A';
+$frequency  = 'N.A';
+$cache      = 'N.A';
+$bogomips   = 'N.A';
+
+if ($cpuinfo = shell_exec('cat /proc/cpuinfo'))
 {
     $processors = preg_split('/\s?\n\s?\n/', trim($cpuinfo));
 
@@ -27,15 +23,16 @@ else
         {
             list($key, $value) = preg_split('/\s*:\s*/', trim($detail));
 
-            switch ($key)
+            switch (strtolower($key))
             {
                 case 'model name':
                 case 'cpu model':
                 case 'cpu':
+                case 'processor':
                     $model = $value;
                 break;
 
-                case 'cpu MHz':
+                case 'cpu mhz':
                 case 'clock':
                     $frequency = $value.' MHz';
                 break;
