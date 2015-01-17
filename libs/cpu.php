@@ -43,6 +43,7 @@ if ($cpuinfo = shell_exec('cat /proc/cpuinfo'))
                 break;
 
                 case 'bogomips':
+                case 'BogoMIPS':
                     $bogomips = $value;
                 break;
             }

@@ -2,22 +2,32 @@
 require 'Utils/Misc.class.php';
 
 // Free
-if (!($free = shell_exec('/usr/bin/free -to | grep Mem: | awk \'{print $4+$6+$7}\'')))
+if (!($free = shell_exec('/usr/bin/free | grep Mem: | awk \'{print $7}\'')))
 {
     $free = 0;
 }
 
 // Total
-if (!($total = shell_exec('/usr/bin/free -to | grep Mem: | awk \'{print $2}\'')))
+if (!($total = shell_exec('/usr/bin/free | grep Mem: | awk \'{print $2}\'')))
 {
     $total = 0;
 }
 
 // Used
-$used = $total - $free;
+if (!($used = shell_exec('/usr/bin/free | grep Mem: | awk \'{print $3}\'')))
+{
+    $used = 0;
+}
 
 // Percent used
-$percent_used = 100 - (round($free / $total * 100));
+if ($total == 0)
+{
+    $percent_used = 0;
+}
+else
+{
+    $percent_used = 100 - (round($free / $total * 100));
+}
 
 
 $datas = array(
