@@ -1,14 +1,19 @@
 <?php
 require 'Utils/Misc.class.php';
 
-// Free
-if (!($free = shell_exec('/usr/bin/free -to | grep Mem: | awk \'{print $4+$6+$7}\'')))
+$free = 0;
+
+if (shell_exec('cat /proc/meminfo'))
 {
-    $free = 0;
+    $free    = shell_exec('grep MemFree /proc/meminfo | awk \'{print $2}\'');
+    $buffers = shell_exec('grep Buffers /proc/meminfo | awk \'{print $2}\'');
+    $cached  = shell_exec('grep Cached /proc/meminfo | awk \'{print $2}\'');
+
+    $free = (int)$free + (int)$buffers + (int)$cached;
 }
 
 // Total
-if (!($total = shell_exec('/usr/bin/free -to | grep Mem: | awk \'{print $2}\'')))
+if (!($total = shell_exec('grep MemTotal /proc/meminfo | awk \'{print $2}\'')))
 {
     $total = 0;
 }

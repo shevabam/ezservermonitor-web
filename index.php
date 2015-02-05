@@ -245,7 +245,7 @@ $update = $Config->checkUpdate();
             <table class="firstBold">
                 <tbody>
                     <tr>
-                        <td class="w20p">Used</td>
+                        <td class="w20p">Used %</td>
                         <td><div class="progressbar-wrap"><div class="progressbar" style="width: 0%;">0%</div></div></td>
                     </tr>
                     <tr>
@@ -277,7 +277,7 @@ $update = $Config->checkUpdate();
             <table class="firstBold">
                 <tbody>
                     <tr>
-                        <td class="w20p">Used</td>
+                        <td class="w20p">Used %</td>
                         <td><div class="progressbar-wrap"><div class="progressbar" style="width: 0%;">0%</div></div></td>
                     </tr>
                     <tr>
