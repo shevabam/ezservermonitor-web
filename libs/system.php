@@ -5,9 +5,9 @@ require 'Utils/Misc.class.php';
 $hostname = php_uname('n');
 
 // OS
-if (!($os = shell_exec('/usr/bin/lsb_release -ds')))
+if (!($os = shell_exec('/usr/bin/lsb_release -ds | cut -d= -f2 | tr -d \'"\'')))
 {
-    if(!($os = shell_exec('cat /etc/system-release'))) 
+    if(!($os = shell_exec('cat /etc/system-release | cut -d= -f2 | tr -d \'"\''))) 
     {
         if (!($os = shell_exec('find /etc/*-release -type f -exec cat {} \; | grep NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
         {
@@ -16,6 +16,7 @@ if (!($os = shell_exec('/usr/bin/lsb_release -ds')))
     }
 }
 $os = trim($os, '"');
+$os = str_replace("\n", '', $os);
 
 // Kernel
 if (!($kernel = shell_exec('/bin/uname -r')))
