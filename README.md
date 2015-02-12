@@ -21,5 +21,6 @@ Each block can be reloaded manually.
 
 You can download the last version [here](http://www.ezservermonitor.com/esm-web/downloads). The [requirements](http://www.ezservermonitor.com/esm-web/documentation) are simple : a Linux environment, a web server (Apache2, Lighttpd, Nginx, ...) and PHP.
 
+The [documentation](http://www.ezservermonitor.com/esm-web/documentation) explains all the parameters of *esm.config.json*.
 
-View more information on the [official website](http://www.ezservermonitor.com/esm-web/features).
+**View more information on the [official website](http://www.ezservermonitor.com/esm-web/features).**
