@@ -158,6 +158,10 @@ $update = $Config->checkUpdate();
                         <td id="cpu-num_cores"></td>
                     </tr>
                     <tr>
+                        <td>Temperature</td>
+                        <td id="cpu-temperature"></td>
+                    </tr>
+                    <tr>
                         <td>Speed</td>
                         <td id="cpu-frequency"></td>
                     </tr>
