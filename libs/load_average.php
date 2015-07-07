@@ -1,5 +1,5 @@
 <?php
-require 'Utils/Misc.class.php';
+require '../autoload.php';
 
 if (!($load_tmp = shell_exec('cat /proc/loadavg | awk \'{print $1","$2","$3}\'')))
 {

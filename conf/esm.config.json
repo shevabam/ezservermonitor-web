@@ -1,0 +1,65 @@
+{
+    "esm": {
+        "version": "2.5",
+        "website": "http://www.ezservermonitor.com",
+        "check_updates": true,
+        "auto_refresh": 0
+    },
+    "cpu": {
+        "enable_temperature": true
+    },
+    "disk": {
+        "show_tmpfs": false
+    },
+    "ping": {
+        "hosts": [
+            "facebook.com",
+            "google.com",
+            "yahoo.com"
+        ]
+    },
+    "last_login": {
+        "max": 5
+    },
+    "services": {
+        "show_port": true,
+        "list": [
+            {
+                "name": "Web Server",
+                "host": "localhost",
+                "port": 80,
+                "protocol": "tcp"
+            },
+            {
+                "name": "Email Server (incoming)",
+                "host": "localhost",
+                "port": 993,
+                "protocol": "tcp"
+            },
+            {
+                "name": "Email Server (outgoing)",
+                "host": "localhost",
+                "port": 587,
+                "protocol": "tcp"
+            },
+            {
+                "name": "FTP Server",
+                "host": "localhost",
+                "port": 21,
+                "protocol": "tcp"
+            },
+            {
+                "name": "Database Server",
+                "host": "localhost",
+                "port": 3306,
+                "protocol": "tcp"
+            },
+            {
+                "name": "SSH",
+                "host": "localhost",
+                "port": 22,
+                "protocol": "tcp"
+            }
+        ]
+    }
+}

@@ -1,5 +1,6 @@
 <?php
-require 'Utils/Misc.class.php';
+require '../autoload.php';
+$Config = new Config();
 
 // Number of cores
 $num_cores = Misc::getCpuCoresNumber();
@@ -10,6 +11,7 @@ $model      = 'N.A';
 $frequency  = 'N.A';
 $cache      = 'N.A';
 $bogomips   = 'N.A';
+$temp       = 'N.A';
 
 if ($cpuinfo = shell_exec('cat /proc/cpuinfo'))
 {
@@ -50,6 +52,32 @@ if ($cpuinfo = shell_exec('cat /proc/cpuinfo'))
     }
 }
 
+if ($frequency == 'N.A')
+{
+    if ($f = shell_exec('cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq'))
+    {
+        $f = $f / 1000;
+        $frequency = $f.' MHz';
+    }
+}
+
+// CPU Temp
+if ($Config->get('cpu:enable_temperature'))
+{
+    if (exec('/usr/bin/sensors | grep -E "^(CPU Temp|Core 0)" | cut -d \'+\' -f2 | cut -d \'.\' -f1', $t))
+    {
+        if (isset($t[0]))
+            $temp = $t[0].' °C';
+    }
+    else
+    {
+        if (exec('cat /sys/class/thermal/thermal_zone0/temp', $t))
+        {
+            $temp = round($t[0] / 1000).' °C';
+        }
+    }
+}
+
 
 $datas = array(
     'model'      => $model,
@@ -57,6 +85,7 @@ $datas = array(
     'frequency'  => $frequency,
     'cache'      => $cache,
     'bogomips'   => $bogomips,
+    'temp'       => $temp,
 );
 
 echo json_encode($datas);

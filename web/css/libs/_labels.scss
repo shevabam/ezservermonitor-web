@@ -2,24 +2,17 @@
 
 span.label {
     padding: 1px 3px 2px;
-    font-size: $label-font-size;
+    font-size: map-get($label, font-size);
     font-weight: bold;
     color: #fff;
     text-transform: uppercase;
     white-space: nowrap;
-    background-color: $label-default;
-    @include border-radius($label-border-radius);
-
-    &.success {
-        background-color: $label-success;
-    }
-    &.warning {
-        background-color: $label-warning;
-    }
-    &.important, &.error {
-        background-color: $label-important;
-    }
-    &.notice {
-        background-color: $label-notice;
+    background-color: map-get-deep($label, types, default);
+    @include border-radius(map-get($label, border-radius));
+    
+    @each $name, $color in map-get($label, types) {
+        &.#{""+$name+""} {
+            background-color: $color;
+        }
     }
 }

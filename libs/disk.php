@@ -1,6 +1,5 @@
 <?php
-require 'Utils/Misc.class.php';
-require 'Utils/Config.class.php';
+require '../autoload.php';
 $Config = new Config();
 
 $datas = array();

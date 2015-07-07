@@ -9,7 +9,7 @@ class Config
     {
         $this->_checkPHPVersion(5.3);
 
-        $this->file = __DIR__.'/../../esm.config.json';
+        $this->file = __DIR__.'/../../conf/esm.config.json';
 
         if (!file_exists($this->file))
             throw new \Exception('Config file '.basename($this->file).' not found');
@@ -47,7 +47,8 @@ class Config
             }
         }
 
-        return $tab == $this->config ? null : $tab;
+        // return $tab == $this->config ? null : $tab;
+        return $tab;
     }
     
     

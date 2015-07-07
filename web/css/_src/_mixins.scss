@@ -15,22 +15,29 @@
     }
 }
 
-@mixin letterpress($opacity) {
-    text-shadow: rgba(255, 255, 255, $opacity) 0 1px 0;
-}
-
-@mixin hide-text {
-    font: 0/0 a;
-    text-shadow: none;
-    color: transparent;
-}
-
-@mixin link-colors($normal, $hover: $normal, $visited: $normal) {
-    color: $normal;
-    &:hover, &:focus {
-        color: $hover;
+@function map-get-deep($map, $keys...) {
+    @if length($keys) == 1 {
+        $keys: nth($keys, 1);
     }
-    &:visited {
-        color: $visited;
+    $warn: "#{nth($keys, 1)}";
+    $length: length($keys);
+    $get: map-get($map, nth($keys, 1));
+
+    @if $length > 1 {
+        @for $i from 2 through $length {
+            @if $get != null and type-of($get) == 'map' {
+                $warn: $warn + "->#{nth($keys, $i)}";
+                $get: map-get($get, nth($keys, $i));
+
+                @if $get == null {
+                    @return map-get-deep-warning($warn, $get);
+                }
+            }
+            @else {
+                @return map-get-deep-warning($warn, $get);
+            }
+        }
     }
+
+    @return $get;
 }

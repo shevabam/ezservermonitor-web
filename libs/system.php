@@ -1,5 +1,5 @@
 <?php
-require 'Utils/Misc.class.php';
+require '../autoload.php';
 
 // Hostname
 $hostname = php_uname('n');
@@ -9,7 +9,7 @@ if (!($os = shell_exec('/usr/bin/lsb_release -ds | cut -d= -f2 | tr -d \'"\'')))
 {
     if(!($os = shell_exec('cat /etc/system-release | cut -d= -f2 | tr -d \'"\''))) 
     {
-        if (!($os = shell_exec('find /etc/*-release -type f -exec cat {} \; | grep NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
+        if (!($os = shell_exec('find /etc/*-release -type f -exec cat {} \; | grep PRETTY_NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
         {
             $os = 'N.A';
         }

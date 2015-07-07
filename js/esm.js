@@ -3,11 +3,17 @@ var esm = {};
 
 esm.getSystem = function() {
 
-    $.get('libs/system.php', function(data) {
+    var module = 'system';
+    
+    esm.reloadBlock_spin(module);
 
-        var $box = $('.box#esm-system .box-content tbody');
+    $.get('libs/'+module+'.php', function(data) {
 
-        esm.insertDatas($box, 'system', data);
+        var $box = $('.box#esm-'+module+' .box-content tbody');
+
+        esm.insertDatas($box, module, data);
+
+        esm.reloadBlock_spin(module);
 
     }, 'json');
 
@@ -16,13 +22,19 @@ esm.getSystem = function() {
 
 esm.getLoad_average = function() {
 
-    $.get('libs/load_average.php', function(data) {
+    var module = 'load_average';
+    
+    esm.reloadBlock_spin(module);
 
-        var $box = $('.box#esm-load_average .box-content');
+    $.get('libs/'+module+'.php', function(data) {
+
+        var $box = $('.box#esm-'+module+' .box-content');
 
         esm.reconfigureGauge($('input#load-average_1', $box), data[0]);
         esm.reconfigureGauge($('input#load-average_5', $box), data[1]);
         esm.reconfigureGauge($('input#load-average_15', $box), data[2]);
+
+        esm.reloadBlock_spin(module);
 
     }, 'json');
 
@@ -31,11 +43,17 @@ esm.getLoad_average = function() {
 
 esm.getCpu = function() {
 
-    $.get('libs/cpu.php', function(data) {
+    var module = 'cpu';
+    
+    esm.reloadBlock_spin(module);
 
-        var $box = $('.box#esm-cpu .box-content tbody');
+    $.get('libs/'+module+'.php', function(data) {
 
-        esm.insertDatas($box, 'cpu', data);
+        var $box = $('.box#esm-'+module+' .box-content tbody');
+
+        esm.insertDatas($box, module, data);
+
+        esm.reloadBlock_spin(module);
 
     }, 'json');
 
@@ -44,11 +62,17 @@ esm.getCpu = function() {
 
 esm.getMemory = function() {
 
-    $.get('libs/memory.php', function(data) {
+    var module = 'memory';
+    
+    esm.reloadBlock_spin(module);
 
-        var $box = $('.box#esm-memory .box-content tbody');
+    $.get('libs/'+module+'.php', function(data) {
 
-        esm.insertDatas($box, 'memory', data);
+        var $box = $('.box#esm-'+module+' .box-content tbody');
+
+        esm.insertDatas($box, module, data);
+
+        esm.reloadBlock_spin(module);
 
         // Percent bar
         var $progress = $('.progressbar', $box);
@@ -72,11 +96,15 @@ esm.getMemory = function() {
 
 esm.getSwap = function() {
 
-    $.get('libs/swap.php', function(data) {
+    var module = 'swap';
+    
+    esm.reloadBlock_spin(module);
 
-        var $box = $('.box#esm-swap .box-content tbody');
+    $.get('libs/'+module+'.php', function(data) {
 
-        esm.insertDatas($box, 'swap', data);
+        var $box = $('.box#esm-'+module+' .box-content tbody');
+
+        esm.insertDatas($box, module, data);
 
         // Percent bar
         var $progress = $('.progressbar', $box);
@@ -92,6 +120,8 @@ esm.getSwap = function() {
             $progress.addClass('orange');
         else
             $progress.addClass('red');
+    
+        esm.reloadBlock_spin(module);
 
     }, 'json');
 
@@ -100,9 +130,13 @@ esm.getSwap = function() {
 
 esm.getDisk = function() {
 
-    $.get('libs/disk.php', function(data) {
+    var module = 'disk';
+    
+    esm.reloadBlock_spin(module);
 
-        var $box = $('.box#esm-disk .box-content tbody');
+    $.get('libs/'+module+'.php', function(data) {
+
+        var $box = $('.box#esm-'+module+' .box-content tbody');
         $box.empty();
 
         for (var line in data)
@@ -127,6 +161,8 @@ esm.getDisk = function() {
 
             $box.append(html);
         }
+    
+        esm.reloadBlock_spin(module);
 
     }, 'json');
 
@@ -135,9 +171,13 @@ esm.getDisk = function() {
 
 esm.getLast_login = function() {
 
-    $.get('libs/last_login.php', function(data) {
+    var module = 'last_login';
+    
+    esm.reloadBlock_spin(module);
 
-        var $box = $('.box#esm-last_login .box-content tbody');
+    $.get('libs/'+module+'.php', function(data) {
+
+        var $box = $('.box#esm-'+module+' .box-content tbody');
         $box.empty();
 
         for (var line in data)
@@ -150,6 +190,8 @@ esm.getLast_login = function() {
 
             $box.append(html);
         }
+    
+        esm.reloadBlock_spin(module);
 
     }, 'json');
 
@@ -158,9 +200,13 @@ esm.getLast_login = function() {
 
 esm.getNetwork = function() {
 
-    $.get('libs/network.php', function(data) {
+    var module = 'network';
+    
+    esm.reloadBlock_spin(module);
 
-        var $box = $('.box#esm-network .box-content tbody');
+    $.get('libs/'+module+'.php', function(data) {
+
+        var $box = $('.box#esm-'+module+' .box-content tbody');
         $box.empty();
 
         for (var line in data)
@@ -176,6 +222,8 @@ esm.getNetwork = function() {
             $box.append(html);
         }
 
+        esm.reloadBlock_spin(module);
+
     }, 'json');
 
 }
@@ -183,9 +231,13 @@ esm.getNetwork = function() {
 
 esm.getPing = function() {
 
-    $.get('libs/ping.php', function(data) {
+    var module = 'ping';
+    
+    esm.reloadBlock_spin(module);
 
-        var $box = $('.box#esm-ping .box-content tbody');
+    $.get('libs/'+module+'.php', function(data) {
+
+        var $box = $('.box#esm-'+module+' .box-content tbody');
         $box.empty();
 
         for (var line in data)
@@ -198,6 +250,8 @@ esm.getPing = function() {
 
             $box.append(html);
         }
+    
+        esm.reloadBlock_spin(module);
 
     }, 'json');
 
@@ -206,9 +260,13 @@ esm.getPing = function() {
 
 esm.getServices = function() {
 
-    $.get('libs/services.php', function(data) {
+    var module = 'services';
+    
+    esm.reloadBlock_spin(module);
 
-        var $box = $('.box#esm-services .box-content tbody');
+    $.get('libs/'+module+'.php', function(data) {
+
+        var $box = $('.box#esm-'+module+' .box-content tbody');
         $box.empty();
 
         for (var line in data)
@@ -225,12 +283,12 @@ esm.getServices = function() {
 
             $box.append(html);
         }
+    
+        esm.reloadBlock_spin(module);
 
     }, 'json');
 
 }
-
-
 
 
 esm.getAll = function() {
@@ -247,7 +305,18 @@ esm.getAll = function() {
 }
 
 esm.reloadBlock = function(block) {
+
     esm.mapping[block]();
+
+}
+
+esm.reloadBlock_spin = function(block) {
+
+    var $module = $('.box#esm-'+block);
+
+    $('.reload', $module).toggleClass('spin disabled');
+    $('.box-content', $module).toggleClass('faded');
+
 }
 
 esm.insertDatas = function($box, block, datas) {

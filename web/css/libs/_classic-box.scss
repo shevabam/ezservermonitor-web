@@ -1,28 +1,28 @@
 @import "compass";
 
 .box {
-    background: $classic-box-background;
-    box-shadow: 3px 3px 0 rgba($classic-box-border, .6);
+    background: map-get($classic-box, background);
+    box-shadow: 3px 3px 0 rgba(map-get($classic-box, border-color), .6);
     margin-bottom: 15px;
-    border: 1px solid $classic-box-border;
+    border: 1px solid map-get($classic-box, border-color);
     padding: 2px;
 
     .box-header {
-        background-color: $classic-box-color;
-        height: $classic-box-header-height;
+        background-color: map-get($classic-box, color);
+        height: map-get-deep($classic-box, header, height);
         
         h1 {
-            color: $classic-box-title-color;
+            color: map-get-deep($classic-box, header, color);
             float: left;
-            font-size: $classic-box-title-fontsize;
+            font-size: map-get-deep($classic-box, header, font-size);
             font-weight: bold;
-            line-height: $classic-box-header-height - 2px;
+            line-height: map-get-deep($classic-box, header, height) - 2px;
             padding-left: 10px;
             text-transform: uppercase;
             /*text-shadow: rgba(0, 0, 0, 1) 0 1px 0;*/
             
             &:first-letter {
-                font-size: $classic-box-title-fontsize + 6px;
+                font-size: map-get-deep($classic-box, header, font-size) + 6px;
             }
         }
         ul {
@@ -34,20 +34,20 @@
                 margin-left: -3px;
                 
                 a {
-                    color: lighten($classic-box-title-color, 10%);
-                    font-size: $classic-box-title-fontsize + 6px;
-                    line-height: $classic-box-header-height;
+                    color: lighten(map-get-deep($classic-box, header, color), 10%);
+                    font-size: map-get-deep($classic-box, header, font-size) + 6px;
+                    line-height: map-get-deep($classic-box, header, height);
                     padding: 4px 10px;
                     
                     text-decoration: none;
                     
                     &:hover:not(.disabled) {
-                        background: lighten($classic-box-color, 20%);
-                        color: $classic-box-color !important;
+                        background: lighten(map-get($classic-box, color), 20%);
+                        color: map-get($classic-box, color) !important;
                     }
 
                     &.disabled {
-                        opacity: .4;
+                        /*opacity: .4;*/
                         
                         &:hover {
                             cursor: default;
@@ -74,11 +74,15 @@
         
         table a {
             text-decoration: none;
-            color: $classic-box-color;
+            color: map-get($classic-box, color);
             
             &:hover {
-                color: lighten($classic-box-color, 20%);
+                color: lighten(map-get($classic-box, color), 20%);
             }
+        }
+
+        &.faded {
+            opacity: .4;
         }
     }
 

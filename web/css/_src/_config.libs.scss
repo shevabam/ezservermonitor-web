@@ -1,26 +1,27 @@
-/* Buttons */
-$button-default-color: #c5c5c5;
-$button-red: #ff0000;
-$button-orange: #fe9c43;
-$button-purple: #9a68c7;
-$button-blue: #3ba9e4;
-$button-green: #75b343;
-$button-black: #4b4b4b;
-$button-salmon: #F5AD9E;
+@import "_config.frontend";
 
 /* Labels */
-$label-default: #bfbfbf;
-$label-success: #46a546;
-$label-warning: #f89406;
-$label-important: #c43c35;
-$label-notice: #62cffc;
-$label-border-radius: 3px;
-$label-font-size: 10px;
+$label: (
+    types: (
+        default: #bfbfbf,
+        success: #46a546,
+        warning: #f89406,
+        important: #c43c35,
+        error: #c43c35,
+        notice: #62cffc
+    ),
+    border-radius: 3px,
+    font-size: 10px
+);
 
 /* Classic box */
-$classic-box-color: darken(#99AEC4, 7%);
-$classic-box-background: #fff;
-$classic-box-border: lighten(#99AEC4, 16%);
-$classic-box-header-height: 35px;
-$classic-box-title-color: #fff;
-$classic-box-title-fontsize: 14px;
+$classic-box: (
+    color: darken($main-color, 7%),
+    background: #fff,
+    border-color: lighten($main-color, 16%),
+    header: (
+        height: 35px,
+        color: #fff,
+        font-size: 14px
+    )
+);

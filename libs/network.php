@@ -1,9 +1,8 @@
 <?php
-require 'Utils/Misc.class.php';
+require '../autoload.php';
 
 $datas    = array();
 $network  = array();
-
 
 // Possible commands for ifconfig and ip
 $commands = array(

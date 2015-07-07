@@ -1,6 +1,5 @@
 <?php
-require 'libs/Utils/Misc.class.php';
-require 'libs/Utils/Config.class.php';
+require 'autoload.php';
 $Config = new Config();
 $update = $Config->checkUpdate();
 ?>
@@ -169,6 +168,12 @@ $update = $Config->checkUpdate();
                         <td>Bogomips</td>
                         <td id="cpu-bogomips"></td>
                     </tr>
+                    <?php if ($Config->get('cpu:enable_temperature')): ?>
+                        <tr>
+                            <td>Temperature</td>
+                            <td id="cpu-temp"></td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>

@@ -52,7 +52,7 @@ nav[role="main"] {
     
     #appname {
         float: left;
-        width: 120px;
+        width: 150px;
         text-align: left;
         
         a {
@@ -232,10 +232,91 @@ table.firstBold tbody tr td:first-child {
 
 
 /* --------------------------- */
+/*  ==     Reload style        */
+/* --------------------------- */
+.reload.spin {
+    @include animation(spin 2000ms infinite linear);
+}
+
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+
+/* --------------------------- */
 /*  ==     Load Average        */
 /* --------------------------- */
 .box#esm-load_average {
     h3 {
         font-weight: normal;
+    }
+}
+
+
+
+
+/* ------------------------- */
+/*  ==     Responsive        */
+/* ------------------------- */
+@media only screen and (max-width: 1024px) {
+    .column-left, .column-right {
+        float: none;
+        width: 100%;
+    }
+    .box {
+        width: 100%;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    nav[role="main"] {
+        #appname {
+            width: 135px;
+        }
+
+        #hostname {
+            margin-left: 0;
+            font-size: 12px;
+        }
+
+        #update {
+            margin-left: 0;
+            font-size: 9px;
+            position: absolute;
+            top: 47px;
+            line-height: inherit;
+        }
+
+        ul > li {
+            > a {
+                padding: 12px 0;
+            }
+        }
+    }
+
+    .box#esm-load_average {
+        div {
+            width: 100%;
+            float: none;
+        }
     }
 }

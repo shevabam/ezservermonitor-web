@@ -1,35 +1,33 @@
 <?php
-require 'Utils/Config.class.php';
+require '../autoload.php';
 $Config = new Config();
 
 
 $datas = array();
 
-if (count($Config->get('services')) > 0)
+$available_protocols = array('tcp', 'udp');
+
+$show_port = $Config->get('services:show_port');
+
+if (count($Config->get('services:list')) > 0)
 {
-    foreach ($Config->get('services') as $service)
+    foreach ($Config->get('services:list') as $service)
     {
-        $host = $service['host'];
-        $sock = @fsockopen($host, $service['port'], $num, $error, 5);
-        
-        if ($sock)
-        {
-            $datas[] = array(
-                'port'      => $service['port'],
-                'name'      => $service['name'],
-                'status'    => 1,
-            );
-            
-            fclose($sock);
-        }
+        $host     = $service['host'];
+        $port     = $service['port'];
+        $name     = $service['name'];
+        $protocol = isset($service['protocol']) && in_array($service['protocol'], $available_protocols) ? $service['protocol'] : 'tcp';
+
+        if (Misc::scanPort($host, $port, $protocol))
+            $status = 1;
         else
-        {
-            $datas[] = array(
-                'port'      => $service['port'],
-                'name'      => $service['name'],
-                'status'    => 0,
-            );
-        }
+            $status = 0;
+
+        $datas[] = array(
+            'port'      => $show_port === true ? $port : '',
+            'name'      => $name,
+            'status'    => $status,
+        );
     }
 }
 

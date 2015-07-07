@@ -23,4 +23,6 @@ You can download the last version [here](http://www.ezservermonitor.com/esm-web/
 
 The [documentation](http://www.ezservermonitor.com/esm-web/documentation) explains all the parameters of *esm.config.json*.
 
+Changelog is available [here](http://www.ezservermonitor.com/esm-web/changelog).
+
 **View more information on the [official website](http://www.ezservermonitor.com/esm-web/features).**
