@@ -3,7 +3,8 @@
         "version": "2.5",
         "website": "http://www.ezservermonitor.com",
         "check_updates": true,
-        "auto_refresh": 0
+        "auto_refresh": 0,
+        "custom_title": ""
     },
     "cpu": {
         "enable_temperature": true
@@ -19,6 +20,7 @@
         ]
     },
     "last_login": {
+        "enable": true,
         "max": 5
     },
     "services": {

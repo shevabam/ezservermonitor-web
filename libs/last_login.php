@@ -5,25 +5,28 @@ $Config = new Config();
 
 $datas = array();
 
-if (!(exec('/usr/bin/lastlog --time 365 | /usr/bin/awk -F\' \' \'{ print $1";"$5, $4, $8, $6}\'', $users)))
+if ($Config->get('last_login:enable'))
 {
-    $datas[] = array(
-        'user' => 'N.A',
-        'date' => 'N.A',
-    );
-}
-else
-{
-    $max = $Config->get('last_login:max');
-
-    for ($i = 1; $i < count($users) && $i <= $max; $i++)
+    if (!(exec('/usr/bin/lastlog --time 365 | /usr/bin/awk -F\' \' \'{ print $1";"$5, $4, $8, $6}\'', $users)))
     {
-        list($user, $date) = explode(';', $users[$i]);
-
         $datas[] = array(
-            'user' => $user,
-            'date' => $date,
+            'user' => 'N.A',
+            'date' => 'N.A',
         );
+    }
+    else
+    {
+        $max = $Config->get('last_login:max');
+
+        for ($i = 1; $i < count($users) && $i <= $max; $i++)
+        {
+            list($user, $date) = explode(';', $users[$i]);
+
+            $datas[] = array(
+                'user' => $user,
+                'date' => $date,
+            );
+        }
     }
 }
 

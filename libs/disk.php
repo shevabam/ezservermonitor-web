@@ -4,7 +4,7 @@ $Config = new Config();
 
 $datas = array();
 
-if (!(exec('/bin/df -T | awk -v c=`/bin/df -T | grep -bo "Type" | awk -F: \'{print $1}\'` \'{print substr($0,c);}\' | tail -n +2 | awk \'{print $1","$2","$3","$4","$5","$6}\'', $df)))
+if (!(exec('/bin/df -T | awk -v c=`/bin/df -T | grep -bo "Type" | awk -F: \'{print $2}\'` \'{print substr($0,c);}\' | tail -n +2 | awk \'{print $1","$2","$3","$4","$5","$6","$7}\'', $df)))
 {
     $datas[] = array(
         'total'         => 'N.A',
@@ -12,6 +12,7 @@ if (!(exec('/bin/df -T | awk -v c=`/bin/df -T | grep -bo "Type" | awk -F: \'{pri
         'free'          => 'N.A',
         'percent_used'  => 0,
         'mount'         => 'N.A',
+        'filesystem'    => 'N.A',
     );
 }
 else
@@ -20,7 +21,7 @@ else
 
     foreach ($df as $mounted)
     {
-        list($type, $total, $used, $free, $percent, $mount) = explode(',', $mounted);
+        list($filesystem, $type, $total, $used, $free, $percent, $mount) = explode(',', $mounted);
 
         if (strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false)
             continue;
@@ -35,6 +36,7 @@ else
                 'free'          => Misc::getSize($free * 1024),
                 'percent_used'  => trim($percent, '%'),
                 'mount'         => $mount,
+                'filesystem'    => $filesystem,
             );
         }
     }

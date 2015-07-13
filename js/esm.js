@@ -152,11 +152,12 @@ esm.getDisk = function() {
 
             var html = '';
             html += '<tr>';
+            html += '<td>'+data[line].filesystem+'</td>';
             html += '<td>'+data[line].mount+'</td>';
             html += '<td><div class="progressbar-wrap"><div class="progressbar '+bar_class+'" style="width: '+data[line].percent_used+'%;">'+data[line].percent_used+'%</div></div></td>';
-            html += '<td class="t-right">'+data[line].free+'</td>';
-            html += '<td class="t-right">'+data[line].used+'</td>';
-            html += '<td class="t-right">'+data[line].total+'</td>';
+            html += '<td class="t-center">'+data[line].free+'</td>';
+            html += '<td class="t-center">'+data[line].used+'</td>';
+            html += '<td class="t-center">'+data[line].total+'</td>';
             html += '</tr>';
 
             $box.append(html);

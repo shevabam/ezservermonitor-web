@@ -35,9 +35,9 @@ img { border: 0; }
 
 .debug { border: 1px solid red; }
 
-.text_left, .t-left { text-align: left; }
+.text_left, .t-left { text-align: left !important; }
 .text_right, .t-right { text-align: right !important; }
-.text_center, .t-center { text-align: center; }
+.text_center, .t-center { text-align: center !important; }
 
 .pfixed { position: fixed !important; }
 .f-left { float: left; }
@@ -66,6 +66,7 @@ img { border: 0; }
     color: #666;
 }*/
 
+.w10p  { width: 10%; }
 .w15p  { width: 15%; }
 .w20p  { width: 20%; }
 .w33p  { width: 33%; }

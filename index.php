@@ -48,7 +48,12 @@ $update = $Config->checkUpdate();
     </div>
 
     <div id="hostname">
-        <?php echo Misc::getHostname(); ?> - <?php echo Misc::getLanIP(); ?>
+        <?php
+        if ($Config->get('esm:custom_title') != '')
+            echo $Config->get('esm:custom_title');
+        else
+            echo Misc::getHostname().' - '.Misc::getLanIP();
+        ?>
     </div>
 
     <?php if (!is_null($update)): ?>
@@ -221,8 +226,9 @@ $update = $Config->checkUpdate();
             <table>
                 <thead>
                     <tr>
+                        <th class="w10p">Filesystem</th>
                         <th class="w20p">Mount</th>
-                        <th class="w35p">Use</th>
+                        <th>Use</th>
                         <th class="w15p">Free</th>
                         <th class="w15p">Used</th>
                         <th class="w15p">Total</th>
@@ -316,9 +322,13 @@ $update = $Config->checkUpdate();
             </div>
 
             <div class="box-content">
-                <table>
-                    <tbody></tbody>
-                </table>
+                <?php if ($Config->get('last_login:enable') == true): ?>
+                    <table>
+                        <tbody></tbody>
+                    </table>
+                <?php else: ?>
+                    <p>Disabled</p>
+                <?php endif; ?>
             </div>
         </div>
 
