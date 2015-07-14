@@ -152,7 +152,10 @@ esm.getDisk = function() {
 
             var html = '';
             html += '<tr>';
-            html += '<td>'+data[line].filesystem+'</td>';
+
+            if (typeof data[line].filesystem != 'undefined')
+                html += '<td>'+data[line].filesystem+'</td>';
+
             html += '<td>'+data[line].mount+'</td>';
             html += '<td><div class="progressbar-wrap"><div class="progressbar '+bar_class+'" style="width: '+data[line].percent_used+'%;">'+data[line].percent_used+'%</div></div></td>';
             html += '<td class="t-center">'+data[line].free+'</td>';
@@ -216,8 +219,8 @@ esm.getNetwork = function() {
             html += '<tr>';
             html += '<td>'+data[line].interface+'</td>';
             html += '<td>'+data[line].ip+'</td>';
-            html += '<td class="t-right">'+data[line].receive+'</td>';
-            html += '<td class="t-right">'+data[line].transmit+'</td>';
+            html += '<td class="t-center">'+data[line].receive+'</td>';
+            html += '<td class="t-center">'+data[line].transmit+'</td>';
             html += '</tr>';
 
             $box.append(html);

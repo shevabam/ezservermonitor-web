@@ -18,6 +18,7 @@ if (!(exec('/bin/df -T | awk -v c=`/bin/df -T | grep -bo "Type" | awk -F: \'{pri
 else
 {
     $mounted_points = array();
+    $key = 0;
 
     foreach ($df as $mounted)
     {
@@ -30,15 +31,19 @@ else
         {
             $mounted_points[] = trim($mount);
 
-            $datas[] = array(
+            $datas[$key] = array(
                 'total'         => Misc::getSize($total * 1024),
                 'used'          => Misc::getSize($used * 1024),
                 'free'          => Misc::getSize($free * 1024),
                 'percent_used'  => trim($percent, '%'),
                 'mount'         => $mount,
-                'filesystem'    => $filesystem,
             );
+
+            if ($Config->get('disk:show_filesystem'))
+                $datas[$key]['filesystem'] = $filesystem;
         }
+
+        $key++;
     }
 
 }

@@ -226,7 +226,9 @@ $update = $Config->checkUpdate();
             <table>
                 <thead>
                     <tr>
-                        <th class="w10p">Filesystem</th>
+                        <?php if ($Config->get('disk:show_filesystem')): ?>
+                            <th class="w10p">Filesystem</th>
+                        <?php endif; ?>
                         <th class="w20p">Mount</th>
                         <th>Use</th>
                         <th class="w15p">Free</th>
