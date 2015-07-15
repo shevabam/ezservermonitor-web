@@ -38,8 +38,8 @@ $update = $Config->checkUpdate();
     });
     </script>
 </head>
-<body>
 
+<body class="theme-<?php echo $Config->get('esm:theme'); ?>">
 
 <nav role="main">
     <div id="appname">
@@ -227,7 +227,7 @@ $update = $Config->checkUpdate();
                 <thead>
                     <tr>
                         <?php if ($Config->get('disk:show_filesystem')): ?>
-                            <th class="w10p">Filesystem</th>
+                            <th class="w10p filesystem">Filesystem</th>
                         <?php endif; ?>
                         <th class="w20p">Mount</th>
                         <th>Use</th>

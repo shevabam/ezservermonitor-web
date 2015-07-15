@@ -6,6 +6,43 @@ $navbar-height: 60px;
 /* Layout */
 $layout-bg-color: #fff;
 
-/* Basic colors */
+/* Default colors */
 $main-color: #99AEC4;
 $text-color: #4D5157;
+
+/* Themes ! */
+$themes: (
+    blue: (
+        main-color: #99AEC4
+    ),
+    aqua: (
+        main-color: #75C8C7
+    ),
+    green: (
+        main-color: #9DC499
+    ),
+    light-green: (
+        main-color: #ADD8C7
+    ),
+    orange: (
+        main-color: #E8B184
+    ),
+    red: (
+        main-color: #B36973
+    ),
+    light-red: (
+        main-color: #E89D9D
+    ),
+    purple: (
+        main-color: #AA8ECC
+    ),
+    slate: (
+        main-color: #707E8E
+    ),
+    light: (
+        main-color: #C4C4C4
+    ),
+    dark: (
+        main-color: #747474
+    )
+);

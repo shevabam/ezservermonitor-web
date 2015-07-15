@@ -4,6 +4,7 @@
         "website": "http://www.ezservermonitor.com",
         "check_updates": true,
         "auto_refresh": 0,
+        "theme": "blue",
         "custom_title": ""
     },
     "cpu": {

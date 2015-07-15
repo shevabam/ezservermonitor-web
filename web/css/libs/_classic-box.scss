@@ -71,6 +71,7 @@
 
     .box-content {
         padding: 6px;
+        overflow: auto;
         
         table a {
             text-decoration: none;
@@ -93,6 +94,41 @@
         span[class^="icon-"] {
             font-size: 14px;
             margin-right: 5px;
+        }
+    }
+}
+
+
+
+/* --------------------- */
+/*  ==     THEMES        */
+/* --------------------- */
+@each $name, $datas in $themes {
+    body.theme-#{""+$name+""} {
+
+        .box {
+            box-shadow: 3px 3px 0 rgba(lighten(map-get($datas, main-color), 16%), .6);
+            border-color: lighten(map-get($datas, main-color), 16%);
+            
+            .box-header {
+                background-color: darken(map-get($datas, main-color), 7%);
+                
+                ul li a {
+                    &:hover:not(.disabled) {
+                        background: lighten(darken(map-get($datas, main-color), 7%), 20%);
+                        color: darken(map-get($datas, main-color), 7%) !important;
+                    }
+                }
+            }
+            .box-content {
+                table a {
+                    color: darken(map-get($datas, main-color), 7%);
+                    
+                    &:hover {
+                        color: lighten(darken(map-get($datas, main-color), 7%), 20%);
+                    }
+                }
+            }
         }
     }
 }

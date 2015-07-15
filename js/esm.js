@@ -154,7 +154,7 @@ esm.getDisk = function() {
             html += '<tr>';
 
             if (typeof data[line].filesystem != 'undefined')
-                html += '<td>'+data[line].filesystem+'</td>';
+                html += '<td class="filesystem">'+data[line].filesystem+'</td>';
 
             html += '<td>'+data[line].mount+'</td>';
             html += '<td><div class="progressbar-wrap"><div class="progressbar '+bar_class+'" style="width: '+data[line].percent_used+'%;">'+data[line].percent_used+'%</div></div></td>';
