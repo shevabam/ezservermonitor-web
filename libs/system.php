@@ -31,22 +31,7 @@ if (!($totalSeconds = shell_exec('/usr/bin/cut -d. -f1 /proc/uptime')))
 }
 else
 {
-    $totalMin   = $totalSeconds / 60;
-    $totalHours = $totalMin / 60;
-
-    $days  = floor($totalHours / 24);
-    $hours = floor($totalHours - ($days * 24));
-    $min   = floor($totalMin - ($days * 60 * 24) - ($hours * 60));
-
-    $uptime = '';
-    if ($days != 0)
-        $uptime .= $days.' day'.Misc::pluralize($days).' ';
-
-    if ($hours != 0)
-        $uptime .= $hours.' hour'.Misc::pluralize($hours).' ';
-
-    if ($min != 0)
-        $uptime .= $min.' minute'.Misc::pluralize($min);
+    $uptime = Misc::getHumanTime($totalSeconds);
 }
 
 // Last boot

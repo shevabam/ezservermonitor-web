@@ -70,6 +70,47 @@ class Misc
 
 
     /**
+     * Seconds to human readable text
+     * Eg: for 36545627 seconds => 1 year, 57 days, 23 hours and 33 minutes
+     * 
+     * @return string Text
+     */
+    public static function getHumanTime($seconds)
+    {
+        $units = array(
+            'year'   => 365*86400,
+            'day'    => 86400,
+            'hour'   => 3600,
+            'minute' => 60,
+            // 'second' => 1,
+        );
+     
+        $parts = array();
+     
+        foreach ($units as $name => $divisor)
+        {
+            $div = floor($seconds / $divisor);
+     
+            if ($div == 0)
+                continue;
+            else
+                if ($div == 1)
+                    $parts[] = $div.' '.$name;
+                else
+                    $parts[] = $div.' '.$name.'s';
+            $seconds %= $divisor;
+        }
+     
+        $last = array_pop($parts);
+     
+        if (empty($parts))
+            return $last;
+        else
+            return join(', ', $parts).' and '.$last;
+    }
+
+
+    /**
      * Returns a command that exists in the system among $cmds
      *
      * @param  array  $cmds             List of commands
