@@ -79,6 +79,10 @@ nav[role="main"] {
         float: left;
         margin-left: 110px;
         line-height: $navbar-height;
+        
+        a {
+            color: #fff;
+        }
     }
 
     #update {

@@ -7,9 +7,6 @@ $update = $Config->checkUpdate();
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php if ($Config->get('esm:auto_refresh') > 0): ?>
-        <meta http-equiv="refresh" content="<?php echo $Config->get('esm:auto_refresh'); ?>">
-    <?php endif; ?>
     <meta name="viewport" content="width=device-width,initial-scale=1" /> 
     <title>eZ Server Monitor - <?php echo Misc::getHostname(); ?></title>
     <link rel="stylesheet" href="web/css/utilities.css" type="text/css">
@@ -35,6 +32,10 @@ $update = $Config->checkUpdate();
         });
 
         esm.getAll();
+
+        <?php if ($Config->get('esm:auto_refresh') > 0): ?>
+            setInterval(function(){ esm.getAll(); }, <?php echo $Config->get('esm:auto_refresh') * 1000; ?>);
+        <?php endif; ?>
     });
     </script>
 </head>
