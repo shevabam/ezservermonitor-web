@@ -1,7 +1,17 @@
 <?php
 require 'autoload.php';
-$Config = new Config();
-$update = $Config->checkUpdate();
+try{
+    $Config = Config::instance();
+    $update = $Config->checkUpdate();
+}
+catch(Exception $e)
+{
+	if ($e instanceof LogicException)
+	{
+		echo $e;
+		die("configuration invalide");
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
