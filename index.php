@@ -67,6 +67,17 @@ catch(Exception $e)
         ?>
     </div>
 
+<?php if ($Config->get('esm:mode') == 'cron'){ ?>
+    <div id="lastCron">
+        <?php
+        $time = Misc::cache('last_cron');
+        if ($time)
+          echo sprintf("Dernière mise à jour par cron: il y a <span class='seconds'>%d</span> secondes", time()-$time);
+        ?>
+        <a href="#" class="reload" onclick="esm.reloadBlock('lastCron');"><span class="icon-cycle"></span></a>
+    </div>
+<?php } ?>
+
     <?php if (!is_null($update)): ?>
         <div id="update">
             <a href="<?php echo $update['fullpath']; ?>">New version available (<?php echo $update['availableVersion']; ?>) ! Click here to download</a>
