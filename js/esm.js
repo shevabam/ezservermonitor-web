@@ -277,10 +277,12 @@ esm.getServices = function() {
         {
             var label_color  = data[line].status == 1 ? 'success' : 'error';
             var label_status = data[line].status == 1 ? 'online' : 'offline';
+			var label_gestion = data[line].status == 1 ? 'fa fa-stop"' : 'fa fa-play';
 
             var html = '';
             html += '<tr>';
             html += '<td class="w15p"><span class="label '+label_color+'">'+label_status+'</span></td>';
+			html += '<td><a href="#"><span class="'+label_gestion+'"></span></a></td>';
             html += '<td>'+data[line].name+'</td>';
             html += '<td class="w15p">'+data[line].port+'</td>';
             html += '</tr>';
@@ -367,5 +369,6 @@ esm.mapping = {
     last_login: esm.getLast_login,
     network: esm.getNetwork,
     ping: esm.getPing,
-    services: esm.getServices
+    services: esm.getServices,
+	gestionServices: esm.gestionServices
 };

@@ -18,7 +18,9 @@
         "hosts": [
             "facebook.com",
             "google.com",
-            "yahoo.com"
+            "yahoo.com",
+			"media-serveur.tk"
+			
         ]
     },
     "last_login": {
@@ -34,28 +36,48 @@
                 "port": 80,
                 "protocol": "tcp"
             },
-            {
-                "name": "Email Server (incoming)",
+			{
+                "name": "CakeBox",
                 "host": "localhost",
-                "port": 993,
+                "port": 81,
                 "protocol": "tcp"
             },
             {
-                "name": "Email Server (outgoing)",
+                "name": "Rutorrent Cyprien",
                 "host": "localhost",
-                "port": 587,
+                "port": 5001,
+                "protocol": "tcp",
+				"stop": "service cyprien-rtorrent stop",
+				"start": "service cyprien-rtorrent start"
+            },
+            {
+                "name": "SickRage Cyprien",
+                "host": "localhost",
+                "port": 8081,
+                "protocol": "tcp"
+            },
+			{
+                "name": "CouchPotato Cyprien",
+                "host": "localhost",
+                "port": 5050,
                 "protocol": "tcp"
             },
             {
-                "name": "FTP Server",
+                "name": "Rutorrent Mathurin",
                 "host": "localhost",
-                "port": 21,
+                "port": 5003,
                 "protocol": "tcp"
             },
             {
-                "name": "Database Server",
+                "name": "SickRage Mathurin",
                 "host": "localhost",
-                "port": 3306,
+                "port": 8082,
+                "protocol": "tcp"
+            },
+            {
+                "name": "CouchPotato Mathurin",
+                "host": "localhost",
+                "port": 5051,
                 "protocol": "tcp"
             },
             {
