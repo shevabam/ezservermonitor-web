@@ -34,13 +34,17 @@
                 "name": "Web Server",
                 "host": "localhost",
                 "port": 80,
-                "protocol": "tcp"
+                "protocol": "tcp",
+				"stop": "",
+				"start": "service nginx start"
             },
 			{
                 "name": "CakeBox",
                 "host": "localhost",
                 "port": 81,
-                "protocol": "tcp"
+                "protocol": "tcp",
+				"stop": "",
+				"start": ""
             },
             {
                 "name": "Rutorrent Cyprien",
@@ -54,37 +58,50 @@
                 "name": "SickRage Cyprien",
                 "host": "localhost",
                 "port": 8081,
-                "protocol": "tcp"
+                "protocol": "tcp",
+				"stop": "docker stop sickrage-cyprien",
+				"start": "docker start sickrage-cyprien"
             },
 			{
                 "name": "CouchPotato Cyprien",
                 "host": "localhost",
                 "port": 5050,
-                "protocol": "tcp"
+                "protocol": "tcp",
+				"stop": "docker stop couchpotato-cyprien",
+				"start": "docker start couchpotato-cyprien"
             },
             {
                 "name": "Rutorrent Mathurin",
                 "host": "localhost",
                 "port": 5003,
-                "protocol": "tcp"
+                "protocol": "tcp",
+				"stop": "service mathurin-rtorrent stop",
+				"start": "service mathurin-rtorrent start"
             },
             {
                 "name": "SickRage Mathurin",
                 "host": "localhost",
                 "port": 8082,
-                "protocol": "tcp"
+                "protocol": "tcp",
+				"stop": "docker stop sickrage-mathurin",
+				"start": "docker start sickrage-mathurin"
             },
             {
                 "name": "CouchPotato Mathurin",
                 "host": "localhost",
                 "port": 5051,
-                "protocol": "tcp"
+                "protocol": "tcp",
+				"stop": "docker stop couchpotato-mathurin",
+				"start": "docker start couchpotato-mathurin"
             },
             {
                 "name": "SSH",
                 "host": "localhost",
                 "port": 22,
-                "protocol": "tcp"
+                "protocol": "tcp",
+				"stop": "",
+				"start": "/etc/init.d/ssh start"
+				
             }
         ]
     }

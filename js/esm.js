@@ -272,6 +272,8 @@ esm.getServices = function() {
 
         var $box = $('.box#esm-'+module+' .box-content tbody');
         $box.empty();
+		
+		var id = 0 ;
 
         for (var line in data)
         {
@@ -282,18 +284,38 @@ esm.getServices = function() {
             var html = '';
             html += '<tr>';
             html += '<td class="w15p"><span class="label '+label_color+'">'+label_status+'</span></td>';
-			html += '<td><a href="#"><span class="'+label_gestion+'"></span></a></td>';
+			html += '<td><a class="reload spin disabled" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';
             html += '<td>'+data[line].name+'</td>';
             html += '<td class="w15p">'+data[line].port+'</td>';
             html += '</tr>';
 
             $box.append(html);
+			
+			id++;
         }
     
         esm.reloadBlock_spin(module);
 
     }, 'json');
 
+}
+
+esm.setServices = function(id) {
+	
+	var module = 'services';
+	
+	$("a[service="+id+"]").toggleClass('spin disabled');
+	 	
+	$.get('libs/'+module+'.php', function(data) {
+
+		var command  = data[id].status == 1 ? data[id].stop : data[id].start;
+		
+		$.get('libs/setservice.php?cmd='+command, function(){esm.getServices()});
+	
+
+    }, 'json');
+	
+	
 }
 
 
@@ -370,5 +392,4 @@ esm.mapping = {
     network: esm.getNetwork,
     ping: esm.getPing,
     services: esm.getServices,
-	gestionServices: esm.gestionServices
 };
