@@ -302,18 +302,16 @@ esm.getServices = function() {
 
 esm.setServices = function(id) {
 	
-	var module = 'services';
+	var debug = false ;
 	
 	$("a[service="+id+"]").toggleClass('spin disabled');
 	 	
-	$.get('libs/'+module+'.php', function(data) {
-
-		var command  = data[id].status == 1 ? data[id].stop : data[id].start;
-		
-		$.get('libs/setservice.php?cmd='+command, function(){esm.getServices()});
+	$.get('libs/setservice.php?id='+id, function(data){ 
 	
+		esm.getServices();
+		if(debug) console.log(data);
 
-    }, 'json');
+	});
 	
 	
 }
