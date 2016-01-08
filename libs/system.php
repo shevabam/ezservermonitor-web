@@ -54,6 +54,7 @@ if (!($current_users = shell_exec('who -u | awk \'{ print $1 }\' | wc -l')))
 // Server datetime
 if (!($server_date = shell_exec('/bin/date')))
 {
+    date_default_timezone_set(@date_default_timezone_get());
     $server_date = date('Y-m-d H:i:s');
 }
 
