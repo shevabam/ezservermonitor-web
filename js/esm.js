@@ -249,7 +249,16 @@ esm.getPing = function() {
             var html = '';
             html += '<tr>';
             html += '<td>'+data[line].host+'</td>';
-            html += '<td>'+data[line].ping+' ms</td>';
+
+            html += '<td class="w15p"><span class="label ';
+            if (data[line].ping.indexOf('Inf') > -1) {
+              html += 'error">OFFLINE';
+            }
+            else {
+              html += 'success">'+data[line].ping+' ms';
+            }
+            html += '</span></td>'
+
             html += '</tr>';
 
             $box.append(html);
