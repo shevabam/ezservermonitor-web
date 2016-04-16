@@ -172,9 +172,15 @@ class Misc
             $handle = @fsockopen($host, $port, $errno, $errstr, $timeout);
 
             if ($handle)
+            {
+                fclose($handle);
                 return true;
+            }
             else
+            {
+                fclose($handle);
                 return false;
+            }
         }
         elseif ($protocol == 'udp')
         {
