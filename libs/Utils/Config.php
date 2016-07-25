@@ -5,7 +5,17 @@ class Config
     public $file = null;
     public $config = null;
 
-    public function __construct()
+    private static $instance = null;
+
+    public static function instance(){
+        if (!Config::$instance)
+        {
+            Config::$instance = new Config();
+        }
+        return Config::$instance;
+    }
+
+    private function __construct()
     {
         $this->_checkPHPVersion(5.3);
 
