@@ -1,6 +1,6 @@
 <?php
-require '../autoload.php';
-$Config = new Config();
+require __DIR__.'/../autoload.php';
+$config = Config::instance();
 
 $datas = array();
 
@@ -29,7 +29,7 @@ else
         if ($percent > 100)
             $percent = 100;
 
-        if (strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false)
+        if (strpos($type, 'tmpfs') !== false && $config->get('disk:show_tmpfs') === false)
             continue;
 
         if (!in_array($mount, $mounted_points))
@@ -44,7 +44,7 @@ else
                 'mount'         => $mount,
             );
 
-            if ($Config->get('disk:show_filesystem'))
+            if ($config->get('disk:show_filesystem'))
                 $datas[$key]['filesystem'] = $filesystem;
         }
 

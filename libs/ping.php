@@ -1,12 +1,12 @@
 <?php
-require '../autoload.php';
-$Config = new Config();
+require __DIR__.'/../autoload.php';
+$config = Config::instance();
 
 
 $datas = array();
 
-if (count($Config->get('ping:hosts')) > 0)
-    $hosts = $Config->get('ping:hosts');
+if (count($config->get('ping:hosts')) > 0)
+    $hosts = $config->get('ping:hosts');
 else
     $hosts = array('google.com', 'wikipedia.org');
 

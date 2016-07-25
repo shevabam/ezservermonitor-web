@@ -1,6 +1,6 @@
 <?php
-require '../autoload.php';
-$Config = new Config();
+require __DIR__.'/../autoload.php';
+$config = Config::instance();
 
 // Number of cores
 $num_cores = Misc::getCpuCoresNumber();
@@ -62,7 +62,7 @@ if ($frequency == 'N.A')
 }
 
 // CPU Temp
-if ($Config->get('cpu:enable_temperature'))
+if ($config->get('cpu:enable_temperature'))
 {
     if (file_exists('/usr/bin/sensors') && exec('/usr/bin/sensors | grep -E "^(CPU Temp|Core 0)" | cut -d \'+\' -f2 | cut -d \'.\' -f1', $t))
     {

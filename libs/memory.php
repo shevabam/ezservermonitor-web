@@ -1,5 +1,6 @@
 <?php
-require '../autoload.php';
+require __DIR__.'/../autoload.php';
+$config = Config::instance();
 
 $free = 0;
 

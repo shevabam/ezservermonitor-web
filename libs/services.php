@@ -1,17 +1,17 @@
 <?php
-require '../autoload.php';
-$Config = new Config();
+require __DIR__.'/../autoload.php';
+$config = Config::instance();
 
 
 $datas = array();
 
 $available_protocols = array('tcp', 'udp');
 
-$show_port = $Config->get('services:show_port');
+$show_port = $config->get('services:show_port');
 
-if (count($Config->get('services:list')) > 0)
+if (count($config->get('services:list')) > 0)
 {
-    foreach ($Config->get('services:list') as $service)
+    foreach ($config->get('services:list') as $service)
     {
         $host     = $service['host'];
         $port     = $service['port'];

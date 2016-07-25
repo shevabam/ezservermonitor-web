@@ -1,5 +1,7 @@
 <?php
-require '../autoload.php';
+require __DIR__.'/../autoload.php';
+
+$config = Config::instance();
 
 if (!($load_tmp = shell_exec('cat /proc/loadavg | awk \'{print $1","$2","$3}\'')))
 {

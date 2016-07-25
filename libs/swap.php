@@ -1,5 +1,7 @@
 <?php
-require '../autoload.php';
+require __DIR__.'/../autoload.php';
+
+$config = Config::instance();
 
 // Free
 if (!($free = shell_exec('grep SwapFree /proc/meminfo | awk \'{print $2}\'')))
