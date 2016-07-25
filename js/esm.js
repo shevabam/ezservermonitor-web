@@ -201,6 +201,35 @@ esm.getLast_login = function() {
 
 }
 
+esm.getLast_sftp_login = function() {
+
+    var module = 'last_sftp_login';
+    
+    esm.reloadBlock_spin(module);
+
+    $.get('libs/'+module+'.php', function(data) {
+
+        var $box = $('.box#esm-'+module+' .box-content tbody');
+        $box.empty();
+
+        for (var line in data)
+        {
+            var html = '';
+            html += '<tr>';
+            html += '<td>'+data[line].user+'</td>';
+            html += '<td class="w50p">'+data[line].date+'</td>';
+            html += '<td class="w50p">'+data[line].src+'</td>';
+            html += '</tr>';
+
+            $box.append(html);
+        }
+    
+        esm.reloadBlock_spin(module);
+
+    }, 'json');
+
+}
+
 
 esm.getNetwork = function() {
 
@@ -312,6 +341,7 @@ esm.getAll = function() {
     esm.getSwap();
     esm.getDisk();
     esm.getLast_login();
+    esm.getLast_sftp_login();
     esm.getNetwork();
     esm.getPing();
     esm.getServices();
@@ -374,6 +404,7 @@ esm.mapping = {
     swap: esm.getSwap,
     disk: esm.getDisk,
     last_login: esm.getLast_login,
+    last_sftp_login: esm.getLast_sftp_login,
     network: esm.getNetwork,
     ping: esm.getPing,
     services: esm.getServices
