@@ -34,7 +34,7 @@ class Config
 
         if ($this->config == null && json_last_error() != JSON_ERROR_NONE)
         {
-            throw new \LogicException(sprintf("Failed to parse config file '%s'. Error: '%s'", basename($this->file) , json_last_error_msg()));
+            throw new \LogicException(sprintf("Failed to parse config file '%s'.\nError: '%s'\n", basename($this->file) , json_last_error_msg()));
         }
     }
 
