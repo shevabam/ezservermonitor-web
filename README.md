@@ -1,1 +1,1 @@
-eZ Server Monitor - Wersja PL
+Just fork of ezservermonitor-web but with polish translation.
