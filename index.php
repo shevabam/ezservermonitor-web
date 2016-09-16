@@ -59,7 +59,7 @@ $update = $Config->checkUpdate();
 
     <?php if (!is_null($update)): ?>
         <div id="update">
-            <a href="<?php echo $update['fullpath']; ?>">New version available (<?php echo $update['availableVersion']; ?>) ! Click here to download</a>
+            <a href="<?php echo $update['fullpath']; ?>">Nowa wersja dostępna (<?php echo $update['availableVersion']; ?>) ! Kliknij tutaj aby pobrać</a>
         </div>
     <?php endif; ?>
 
