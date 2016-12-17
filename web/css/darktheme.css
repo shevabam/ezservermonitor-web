@@ -1,0 +1,77 @@
+/* fond */
+#main-container {
+    background-color: #000;
+}
+
+/* bandeau principal */
+body.theme-blue nav[role="main"],
+/* bandeaux de titre */
+body.theme-blue .box .box-header {
+    background-color: hsl(203, 76%, 46%);
+}
+nav[role="main"],
+/* logo */
+nav[role="main"] #appname a {
+    color: hsl(0, 0%, 15%);
+}
+
+
+/* police */
+body {
+    font-family: "DejaVu Sans", sans-serif;
+}
+
+/* blocs */
+.box {
+    background-color: hsl(0, 0%, 15%);
+    color: hsl(0, 0%, 85%);
+}
+body.theme-blue .box {
+    border-color: hsl(0, 0%, 40%);
+}
+/* titre */
+.box .box-header h1 {
+    color: hsl(0, 0%, 15%);
+}
+
+/* table */
+table:not(.no-style) tbody tr:nth-child(2n+1) {
+    background-color: hsl(0, 0%, 25%);
+}
+table:not(.no-style) tr {
+    border-bottom-color: hsl(0, 0%, 50%);
+    border-top-color: hsl(0, 0%, 50%);
+}
+body.theme-blue table:not(.no-style) tbody tr:nth-child(2n):hover {
+    background: hsl(0, 0%, 15%);
+}
+body.theme-blue table:not(.no-style) tbody tr:nth-child(2n+1):hover {
+    background: hsl(0, 0%, 25%);
+}
+
+/* bouton recharger */
+body.theme-blue .box .box-header ul li a:hover:not(.disabled),
+body.theme-blue nav[role="main"] > ul > li > a:hover {
+    background: hsl(203, 76%, 46%);
+    color: white !important;
+}
+.box .box-header ul li a,
+nav[role="main"] > ul > li > a {
+    color: hsl(0, 0%, 15%);
+}
+
+/* barre de progression */
+.progressbar-wrap .progressbar.orange {
+    background-color: hsl(23, 76%, 60%);
+}
+.progressbar-wrap .progressbar.green {
+    background-color: hsl(111, 50%, 50%);
+}
+.progressbar {
+	color: black;
+}
+
+/* online offline */
+span.label {
+	color: black;
+}
