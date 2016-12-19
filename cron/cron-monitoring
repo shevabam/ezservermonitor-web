@@ -1,0 +1,19 @@
+#!/bin/sh
+# usage: execute this script in a cron. you can create a file in /etc/cron.d/monitoring with the following content:
+
+# MAILTO=user@example.com
+#
+# */5 * * * * root [ -x /var/www/path/to/monitoring/cron/cron-monitoring ] && /var/www/path/to/monitoring/cron/cron-monitoring || echo "monitoring cron fail"
+
+
+# for script in $(ls /var/www/path/to/monitoring/libs/*.php);do
+path=$(dirname $0);
+path=$(realpath "$path/../libs");
+for script in cpu disk last_cron last_login last_sftp_login load_average memory network ping services swap system; do
+  php $path/${script}.php --save --quiet
+  if [ $? -ne 0 ]; then
+    echo "ERROR for $script"
+  #else
+  #  echo "ok for $script"
+  fi
+done
