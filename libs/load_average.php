@@ -3,7 +3,7 @@ require __DIR__.'/../autoload.php';
 
 $config = Config::instance();
 
-if (!($load_tmp = shell_exec('cat /proc/loadavg | awk \'{print $1","$2","$3}\'')))
+if (!($load_tmp = Misc::shellexec('cat /proc/loadavg | awk \'{print $1","$2","$3}\'')))
 {
     $load = array(0, 0, 0);
 }
