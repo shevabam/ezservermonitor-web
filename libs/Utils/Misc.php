@@ -288,8 +288,9 @@ class Misc
             throw new Exception("invalid cache key");
         $config = Config::instance();
         $salt   = $config->get('esm:salt');
-        $file = sha1($name.$salt).'.txt';
-        //echo "$name \n<br>\t$file\n<br>";
+        $prefix   = $config->get('esm:cron_output_prefix');
+        $file = $prefix.sha1($name.$salt).'.txt';
+
         $dir = ROOTPATH.DIRECTORY_SEPARATOR.$config->get('esm:cron_output_path').DIRECTORY_SEPARATOR;
         if ($data === NULL)
         {

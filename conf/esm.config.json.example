@@ -8,6 +8,7 @@
         "custom_title": "",
         "mode" : "cron",
         "cron_output_path"   : "cache",
+        "cron_output_prefix" : "ezservermonitor-",
         "salt": "something random used to build the tmp files"
     },
     "system" : {
