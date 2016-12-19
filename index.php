@@ -337,7 +337,7 @@ catch(Exception $e)
 
 
     <div class="t-center">
-        <div class="box column-left column-33" id="esm-last_login">
+        <div class="box column-left " id="esm-last_login">
             <div class="box-header">
                 <h1>Last login</h1>
                 <ul>
@@ -356,9 +356,7 @@ catch(Exception $e)
             </div>
         </div>
 
-
-
-        <div class="box column-right column-33" id="esm-services">
+        <div class="box column-right " id="esm-services">
             <div class="box-header">
                 <h1>Services status</h1>
                 <ul>
@@ -392,9 +390,7 @@ catch(Exception $e)
             </div>
         </div>
 
-
-
-        <div class="box t-center" style="margin: 0 33%;" id="esm-ping">
+        <div class="box column-right" id="esm-ping">
             <div class="box-header">
                 <h1>Ping</h1>
                 <ul>
