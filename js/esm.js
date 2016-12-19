@@ -345,6 +345,7 @@ esm.getAll = function() {
     esm.getNetwork();
     esm.getPing();
     esm.getServices();
+    esm.getLastCron();
 }
 
 esm.reloadBlock = function(block) {
@@ -394,6 +395,21 @@ esm.reconfigureGauge = function($gauge, newValue) {
     $gauge.val(newValue).trigger('change');
 }
 
+esm.getLastCron = function() {
+
+    var module = 'last_cron';
+    esm.reloadBlock_spin(module);
+    $.get('libs/'+module+'.php', function(data) {
+        var $box = $('#lastCron .seconds');
+
+        $box.text(data);
+
+        esm.reloadBlock_spin(module);
+
+    }, 'json');
+
+}
+
 
 esm.mapping = {
     all: esm.getAll,
@@ -407,5 +423,6 @@ esm.mapping = {
     last_sftp_login: esm.getLast_sftp_login,
     network: esm.getNetwork,
     ping: esm.getPing,
-    services: esm.getServices
+    services: esm.getServices,
+    lastCron: esm.getLastCron
 };
