@@ -4,13 +4,13 @@ require __DIR__.'/../autoload.php';
 $config = Config::instance();
 
 // Free
-if (!($free = shell_exec('grep SwapFree /proc/meminfo | awk \'{print $2}\'')))
+if (!($free = Misc::shellexec('grep SwapFree /proc/meminfo | awk \'{print $2}\'')))
 {
     $free = 0;
 }
 
 // Total
-if (!($total = shell_exec('grep SwapTotal /proc/meminfo | awk \'{print $2}\'')))
+if (!($total = Misc::shellexec('grep SwapTotal /proc/meminfo | awk \'{print $2}\'')))
 {
     $total = 0;
 }

@@ -24,13 +24,13 @@ $os = trim($os, '"');
 $os = str_replace("\n", '', $os);
 
 // Kernel
-if (!($kernel = shell_exec('/bin/uname -r')))
+if (!($kernel = Misc::shellexec('/bin/uname -r')))
 {
     $kernel = 'N.A';
 }
 
 // Uptime
-if (!($totalSeconds = shell_exec('/usr/bin/cut -d. -f1 /proc/uptime')))
+if (!($totalSeconds = Misc::shellexec('/usr/bin/cut -d. -f1 /proc/uptime')))
 {
     $uptime = 'N.A';
 }
@@ -40,7 +40,7 @@ else
 }
 
 // Last boot
-if (!($upt_tmp = shell_exec('cat /proc/uptime')))
+if (!($upt_tmp = Misc::shellexec('cat /proc/uptime')))
 {
     $last_boot = 'N.A';
 }
@@ -51,13 +51,13 @@ else
 }
 
 // Current users
-if (!($current_users = shell_exec('who -u | awk \'{ print $1 }\' | wc -l')))
+if (!($current_users = Misc::shellexec('who -u | awk \'{ print $1 }\' | wc -l')))
 {
     $current_users = 'N.A';
 }
 
 // Server datetime
-if (!($server_date = shell_exec('/bin/date')))
+if (!($server_date = Misc::shellexec('/bin/date')))
 {
     $server_date = date('Y-m-d H:i:s');
 }

@@ -64,7 +64,7 @@ function getIpCommand($commands, $interface)
 
 $getInterfaces_cmd = getInterfacesCommand($commands);
 
-if (is_null($getInterfaces_cmd) || !(exec($getInterfaces_cmd, $getInterfaces)))
+if (is_null($getInterfaces_cmd) || !(Misc::exec($getInterfaces_cmd, $getInterfaces)))
 {
     $datas[] = array('interface' => 'N.A', 'ip' => 'N.A');
 }
@@ -76,7 +76,7 @@ else
 
         $getIp_cmd = getIpCommand($commands, $name);        
 
-        if (is_null($getIp_cmd) || !(exec($getIp_cmd, $ip)))
+        if (is_null($getIp_cmd) || !(Misc::exec($getIp_cmd, $ip)))
         {
             $network[] = array(
                 'name' => $name,
@@ -98,8 +98,8 @@ else
     foreach ($network as $interface)
     {
         // Get transmit and receive datas by interface
-        exec('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes', $getBandwidth_tx);
-        exec('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes', $getBandwidth_rx);
+        Misc::exec('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes', $getBandwidth_tx);
+        Misc::exec('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes', $getBandwidth_rx);
 
         $datas[] = array(
             'interface' => $interface['name'],
