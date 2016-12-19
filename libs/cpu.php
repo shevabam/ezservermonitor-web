@@ -91,4 +91,5 @@ $datas = array(
     'temp'       => $temp,
 );
 
-echo json_encode($datas);
+if (!isset($_SERVER['argv']) || !in_array('--quiet', $_SERVER['argv']))
+	echo json_encode($datas);

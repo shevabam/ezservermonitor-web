@@ -32,4 +32,5 @@ if (count($config->get('services:list')) > 0)
 }
 
 
-echo json_encode($datas);
+if (!isset($_SERVER['argv']) || !in_array('--quiet', $_SERVER['argv']))
+	echo json_encode($datas);

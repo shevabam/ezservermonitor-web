@@ -85,4 +85,5 @@ $datas = array(
     'server_date'   => $server_date,
 );
 
-echo json_encode($datas);
+if (!isset($_SERVER['argv']) || !in_array('--quiet', $_SERVER['argv']))
+	echo json_encode($datas);
