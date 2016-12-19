@@ -44,7 +44,7 @@ if (PHP_SAPI == 'cli')
 		}
 		else
 		{
-			die("\n\tfor file $auth_file, no match with pattern\n $pattern \n");
+			//die("\n\tfor file $auth_file, no match with pattern\n $pattern \n");
 		}
 	}
 	$datas = array_reverse($datas);

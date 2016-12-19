@@ -54,7 +54,8 @@ if ($cpuinfo = Misc::shellexec('cat /proc/cpuinfo'))
 
 if ($frequency == 'N.A')
 {
-    if ($f = Misc::shellexec('cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq'))
+    $cmd = $config->get('cpu:cmdMaxFreq');
+    if ($f = Misc::shellexec($cmd))
     {
         $f = $f / 1000;
         $frequency = $f.' MHz';
@@ -64,14 +65,16 @@ if ($frequency == 'N.A')
 // CPU Temp
 if ($config->get('cpu:enable_temperature'))
 {
-    if (file_exists('/usr/bin/sensors') && Misc::exec('/usr/bin/sensors | grep -E "^(CPU Temp|Core 0)" | cut -d \'+\' -f2 | cut -d \'.\' -f1', $t))
+	$cmd = $config->get('cpu:cmdTemperature');
+    if (Misc::exec($cmd, $t))
     {
         if (isset($t[0]))
             $temp = $t[0].' °C';
     }
     else
     {
-        if (Misc::exec('cat /sys/class/thermal/thermal_zone0/temp', $t))
+        $cmd = $config->get('cpu:cmdThermal');
+        if (Misc::exec($cmd, $t))
         {
             $temp = round($t[0] / 1000).' °C';
         }

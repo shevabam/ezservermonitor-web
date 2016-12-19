@@ -18,7 +18,7 @@ foreach ($hosts as $host)
     {
         $result[0] = "+Infinity";
     }
-    
+
     $datas[] = array(
         'host' => $host,
         'ping' => $result[0],

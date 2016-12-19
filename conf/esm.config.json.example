@@ -10,10 +10,25 @@
         "cron_output_path"   : "cache",
         "salt": "something random used to build the tmp files"
     },
+    "system" : {
+        "cmdKernel"      : "/bin/uname -r",
+        "cmdUptime"      : "/usr/bin/cut -d. -f1 /proc/uptime",
+        "cmdLastBoot"    : "cat /proc/uptime",
+        "cmdCurrentUser" : "who -u | awk '{ print $1 }' | wc -l",
+        "cmdServerDate"  : "/bin/date"
+    },
+    "load_average":{
+        "cmd" : "cat /proc/loadavg | awk '{print $1','$2','$3}'"
+    },
     "cpu": {
+        "cmdinfo"       : "cat /proc/cpuinfo",
+        "cmdMaxFreq"    : "cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq",
+        "cmdThermal"    : "cat /sys/class/thermal/thermal_zone0/temp",
+        "cmdTemperature": "/usr/bin/sensors | grep -E '^(CPU Temp|Core 0)' | cut -d '+' -f2 | cut -d '.' -f1",
         "enable_temperature": true
     },
     "disk": {
+        "cmd" : "/bin/df -T -P | tail -n +2 | awk \'{ if (NF > 7) { for (i=1; i<NF-6; i++) { printf("%s ", $i); } for (i=NF-6; i<NF; i++) { printf("%s,", $i); } print $NF; } else { print $1","$2","$3","$4","$5","$6","$7; } }\'",
         "show_tmpfs": false,
         "show_filesystem": true
     },
@@ -25,8 +40,24 @@
         ]
     },
     "last_login": {
-        "enable": true,
-        "max": 5
+        "cmd" : "/usr/bin/lastlog --time 365 | awk '{ printf $1\";\"; for (i=4; i<NF; i++) printf $i\" \"; print $NF; }'"
+        "enable": "1",
+        "max": "10"
+    },
+    "last_sftp_login": {
+        "enable": "1",
+        "max": "100"
+    },
+    "memory": {
+        "cmdMeminfo" : "cat /proc/meminfo",
+        "cmdMemFree"  : "grep MemFree /proc/meminfo | awk '{print $2}'",
+        "cmdBuffers"  : "grep Buffers /proc/meminfo | awk '{print $2}'",
+        "cmdCached"   : "grep Cached /proc/meminfo  | awk  '{print $2}'",
+        "cmdMemTotal" : "grep MemTotal /proc/meminfo | awk '{print $2}'"
+    },
+    "swap" : {
+        "cmdSwapFree"  : "grep SwapFree /proc/meminfo | awk '{print $2}'",
+        "cmdSwapTotal" : "grep SwapTotal /proc/meminfo | awk '{print $2}'"
     },
     "services": {
         "show_port": true,

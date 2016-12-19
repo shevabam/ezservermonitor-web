@@ -7,30 +7,39 @@ $config = Config::instance();
 $hostname = php_uname('n');
 
 // OS
-if (!file_exists('/usr/bin/lsb_release') || !($os = shell_exec('/usr/bin/lsb_release -ds | cut -d= -f2 | tr -d \'"\'')))
-{
-    if (!file_exists('/etc/system-release') || !($os = shell_exec('cat /etc/system-release | cut -d= -f2 | tr -d \'"\'')))
-    {
-        if (!file_exists('/etc/os-release') || !($os = shell_exec('cat /etc/os-release | grep PRETTY_NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
-        {
-            if (!($os = shell_exec('find /etc/*-release -type f -exec cat {} \; | grep PRETTY_NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
-            {
-                $os = 'N.A';
-            }
-        }
+if (!is_readable($file = '/usr/bin/lsb_release')) {
+  if (!is_readable($file = '/etc/system-release')) {
+    if (!is_readable($file = '/etc/os-release')) {
+      $file = false;
     }
+  }
+}
+if (!$file) {
+  if (!($os = Misc::shellexec("find /etc/*-release -type f -exec cat {} \\; | grep PRETTY_NAME | tail -n 1 | cut -d= -f2 | tr -d '\"'")))
+  {
+    $os = 'N.A';
+  }
+}
+else {
+  if ($file == '/etc/os-release') {
+    $os = Misc::shellexec('cat /etc/os-release | grep PRETTY_NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'');
+  } else {
+    $os = Misc::shellexec($file . " -ds | cut -d= -f2 | tr -d '\"'");
+  }
 }
 $os = trim($os, '"');
 $os = str_replace("\n", '', $os);
 
 // Kernel
-if (!($kernel = Misc::shellexec('/bin/uname -r')))
+$cmd = $config->get('system:cmdKernel');
+if (!($kernel = Misc::shellexec($cmd)))
 {
     $kernel = 'N.A';
 }
 
 // Uptime
-if (!($totalSeconds = Misc::shellexec('/usr/bin/cut -d. -f1 /proc/uptime')))
+$cmd = $config->get('system:cmdUptime');
+if (!($totalSeconds = Misc::shellexec($cmd)))
 {
     $uptime = 'N.A';
 }
@@ -40,7 +49,8 @@ else
 }
 
 // Last boot
-if (!($upt_tmp = Misc::shellexec('cat /proc/uptime')))
+$cmd = $config->get('system:cmdLastBoot');
+if (!($upt_tmp = Misc::shellexec($cmd)))
 {
     $last_boot = 'N.A';
 }
@@ -51,13 +61,15 @@ else
 }
 
 // Current users
-if (!($current_users = Misc::shellexec('who -u | awk \'{ print $1 }\' | wc -l')))
+$cmd = $config->get('system:cmdCurrentUser');
+if (!($current_users = Misc::shellexec($cmd)))
 {
     $current_users = 'N.A';
 }
 
+$cmd = $config->get('system:cmdServerDate');
 // Server datetime
-if (!($server_date = Misc::shellexec('/bin/date')))
+if (!($server_date = Misc::shellexec($cmd)))
 {
     $server_date = date('Y-m-d H:i:s');
 }
