@@ -5,7 +5,10 @@
         "check_updates": true,
         "auto_refresh": 0,
         "theme": "blue",
-        "custom_title": ""
+        "custom_title": "",
+        "mode" : "cron",
+        "cron_output_path"   : "cache",
+        "salt": "something random used to build the tmp files"
     },
     "cpu": {
         "enable_temperature": true
