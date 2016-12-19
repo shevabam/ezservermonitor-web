@@ -1,10 +1,12 @@
 <?php
-require '../autoload.php';
-$Config = new Config();
+require __DIR__.'/../autoload.php';
+$config = Config::instance();
 
 $datas = array();
 
-if (!(exec('/bin/df -T -P | awk -v c=`/bin/df -T | grep -bo "Type" | awk -F: \'{print $2}\'` \'{print substr($0,c);}\' | tail -n +2 | awk \'{print $1","$2","$3","$4","$5","$6","$7}\'', $df)))
+$cmd = $config->get('disk:cmd');
+Misc::exec($cmd, $df);
+if (!$df)
 {
     $datas[] = array(
         'total'         => 'N.A',
@@ -24,7 +26,7 @@ else
     {
         list($filesystem, $type, $total, $used, $free, $percent, $mount) = explode(',', $mounted);
 
-        if (strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false)
+        if (strpos($type, 'tmpfs') !== false && $config->get('disk:show_tmpfs') === false)
             continue;
 
         if (!in_array($mount, $mounted_points))
@@ -39,7 +41,7 @@ else
                 'mount'         => $mount,
             );
 
-            if ($Config->get('disk:show_filesystem'))
+            if ($config->get('disk:show_filesystem'))
                 $datas[$key]['filesystem'] = $filesystem;
         }
 
@@ -49,4 +51,5 @@ else
 }
 
 
-echo json_encode($datas);
+if (!isset($_SERVER['argv']) || !in_array('--quiet', $_SERVER['argv']))
+	echo json_encode($datas);

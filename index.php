@@ -1,7 +1,17 @@
 <?php
 require 'autoload.php';
-$Config = new Config();
-$update = $Config->checkUpdate();
+try{
+    $Config = Config::instance();
+    $update = $Config->checkUpdate();
+}
+catch(Exception $e)
+{
+	if ($e instanceof LogicException)
+	{
+		echo $e;
+		die("configuration invalide");
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +66,17 @@ $update = $Config->checkUpdate();
             echo Misc::getHostname().' - '.Misc::getLanIP();
         ?>
     </div>
+
+<?php if ($Config->get('esm:mode') == 'cron'){ ?>
+    <div id="lastCron">
+        <?php
+        $time = Misc::cache('last_cron');
+        if ($time)
+          echo sprintf("Dernière mise à jour par cron: il y a <span class='seconds'>%d</span> secondes", time()-$time);
+        ?>
+        <a href="#" class="reload" onclick="esm.reloadBlock('lastCron');"><span class="icon-cycle"></span></a>
+    </div>
+<?php } ?>
 
     <?php if (!is_null($update)): ?>
         <div id="update">
@@ -316,7 +337,7 @@ $update = $Config->checkUpdate();
 
 
     <div class="t-center">
-        <div class="box column-left column-33" id="esm-last_login">
+        <div class="box column-left " id="esm-last_login">
             <div class="box-header">
                 <h1>Last login</h1>
                 <ul>
@@ -335,9 +356,7 @@ $update = $Config->checkUpdate();
             </div>
         </div>
 
-
-
-        <div class="box column-right column-33" id="esm-services">
+        <div class="box column-right " id="esm-services">
             <div class="box-header">
                 <h1>Services status</h1>
                 <ul>
@@ -352,10 +371,26 @@ $update = $Config->checkUpdate();
             </div>
         </div>
 
+    <div class="t-center">
+        <div class="box column-left " id="esm-last_sftp_login">
+            <div class="box-header">
+                <h1>Last SSH/SFTP login</h1>
+                <ul>
+                    <li><a href="#" class="reload" onclick="esm.reloadBlock('last_sftp_login');"><span class="icon-cycle"></span></a></li>
+                </ul>
+            </div>
+            <div class="box-content">
+                <?php if ($Config->get('last_sftp_login:enable') == true): ?>
+                    <table>
+                        <tbody></tbody>
+                    </table>
+                <?php else: ?>
+                    <p>Disabled</p>
+                <?php endif; ?>
+            </div>
+        </div>
 
-
-
-        <div class="box t-center" style="margin: 0 33%;" id="esm-ping">
+        <div class="box column-right" id="esm-ping">
             <div class="box-header">
                 <h1>Ping</h1>
                 <ul>

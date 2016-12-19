@@ -1,14 +1,16 @@
 <?php
-require '../autoload.php';
+require __DIR__.'/../autoload.php';
+
+$config = Config::instance();
 
 // Free
-if (!($free = shell_exec('grep SwapFree /proc/meminfo | awk \'{print $2}\'')))
+if (!($free = Misc::shellexec($config->get('swap:cmdSwapFree'))))
 {
     $free = 0;
 }
 
 // Total
-if (!($total = shell_exec('grep SwapTotal /proc/meminfo | awk \'{print $2}\'')))
+if (!($total = Misc::shellexec($config->get('swap:cmdSwapTotal'))))
 {
     $total = 0;
 }
@@ -29,4 +31,5 @@ $datas = array(
     'percent_used'  => $percent_used,
 );
 
-echo json_encode($datas);
+if (!isset($_SERVER['argv']) || !in_array('--quiet', $_SERVER['argv']))
+	echo json_encode($datas);
