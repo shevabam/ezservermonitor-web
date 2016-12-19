@@ -16,7 +16,7 @@ foreach ($hosts as $host)
 
     if (!isset($result[0]))
     {
-        $result[0] = 0;
+        $result[0] = "+Infinity";
     }
     
     $datas[] = array(
