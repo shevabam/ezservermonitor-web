@@ -48,7 +48,9 @@ class Config
         $tab = $this->config;
         
         $explode = explode(':', $var);
-        
+        if (!$explode)
+            return false;
+
         foreach ($explode as $vartmp)
         {
             if (isset($tab[$vartmp]))
@@ -57,11 +59,11 @@ class Config
             }
         }
 
-        // return $tab == $this->config ? null : $tab;
-        return $tab;
+        // do not return all config if param is missing
+        return $tab == $this->config ? null : $tab;
     }
-    
-    
+
+
     /**
      * Returns all config variables
      */
@@ -90,7 +92,7 @@ class Config
     {
         if ($this->get('esm:check_updates') === false)
             return null;
-        
+
         $response       = null;
         $this_version   = $this->get('esm:version');
         $update_url     = $this->get('esm:website').'/esm-web/update/'.$this_version;
