@@ -21,11 +21,11 @@ class Misc
             else
                 break;
         }
-        
+
         return round($filesize, $precision).' '.$units[$idUnit].'B';
     }
-    
-    
+
+
     /**
      * Returns hostname
      *
@@ -39,14 +39,14 @@ class Misc
 
     /**
      * Returns CPU cores number
-     * 
+     *
      * @return  int  Number of cores
      */
     public static function getCpuCoresNumber()
     {
-        if (!($num_cores = shell_exec('/bin/grep -c ^processor /proc/cpuinfo')))
+        if (!($num_cores = Misc::shellexec("/bin/grep -c ^processor /proc/cpuinfo")))
         {
-            if (!($num_cores = trim(shell_exec('/usr/bin/nproc'))))
+            if (!($num_cores = trim(Misc::shellexec("/usr/bin/nproc"))))
             {
                 $num_cores = 1;
             }
@@ -73,7 +73,7 @@ class Misc
     /**
      * Seconds to human readable text
      * Eg: for 36545627 seconds => 1 year, 57 days, 23 hours and 33 minutes
-     * 
+     *
      * @return string Text
      */
     public static function getHumanTime($seconds)
@@ -85,13 +85,13 @@ class Misc
             'minute' => 60,
             // 'second' => 1,
         );
-     
+
         $parts = array();
-     
+
         foreach ($units as $name => $divisor)
         {
             $div = floor($seconds / $divisor);
-     
+
             if ($div == 0)
                 continue;
             else
@@ -101,9 +101,9 @@ class Misc
                     $parts[] = $div.' '.$name.'s';
             $seconds %= $divisor;
         }
-     
+
         $last = array_pop($parts);
-     
+
         if (empty($parts))
             return $last;
         else
@@ -125,10 +125,12 @@ class Misc
 
         foreach ($cmds as $cmd)
         {
-            if (trim(shell_exec($cmd.$args)) != '')
+            $res = Misc::exec($cmd.$args, $output);
+            //if (is_array($output) && count($output)>0)
+            if ($res)
             {
                 $return = $cmd;
-                
+
                 if ($returnWithArgs)
                     $return .= $args;
 
@@ -145,7 +147,7 @@ class Misc
      * Ex : echo 'mot'.Misc::pluralize(5); ==> prints mots
      * Ex : echo 'cheva'.Misc::pluralize(5, 'ux', 'l'); ==> prints chevaux
      * Ex : echo 'cheva'.Misc::pluralize(1, 'ux', 'l'); ==> prints cheval
-     * 
+     *
      * @param  int       $nb         Number
      * @param  string    $plural     String for plural word
      * @param  string    $singular   String for singular word
@@ -196,8 +198,8 @@ class Misc
 
             $endTime = time();
 
-            $timeDiff = $endTime - $startTime; 
-            
+            $timeDiff = $endTime - $startTime;
+
             fclose($handle);
 
             if ($timeDiff >= $timeout)
