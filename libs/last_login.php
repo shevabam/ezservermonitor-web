@@ -1,13 +1,12 @@
 <?php
-require '../autoload.php';
-$Config = new Config();
-
+require __DIR__.'/../autoload.php';
+$config = Config::instance();
 
 $datas = array();
 
-if ($Config->get('last_login:enable'))
+if ($config->get('last_login:enable'))
 {
-    if (!(exec('/usr/bin/lastlog --time 365 | /usr/bin/awk -F\' \' \'{ print $1" ("$3");"$5, $6, $9, $7}\'', $users)))
+    if (!(Misc::exec($config->get('last_login:cmd'), $users)))
     {
         $datas[] = array(
             'user' => 'N.A',
@@ -16,7 +15,7 @@ if ($Config->get('last_login:enable'))
     }
     else
     {
-        $max = $Config->get('last_login:max');
+        $max = $config->get('last_login:max');
 
         for ($i = 1; $i < count($users) && $i <= $max; $i++)
         {
@@ -30,4 +29,5 @@ if ($Config->get('last_login:enable'))
     }
 }
 
-echo json_encode($datas);
+if (!isset($_SERVER['argv']) || !in_array('--quiet', $_SERVER['argv']))
+	echo json_encode($datas);

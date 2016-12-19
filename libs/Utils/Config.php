@@ -5,7 +5,17 @@ class Config
     public $file = null;
     public $config = null;
 
-    public function __construct()
+    private static $instance = null;
+
+    public static function instance(){
+        if (!Config::$instance)
+        {
+            Config::$instance = new Config();
+        }
+        return Config::$instance;
+    }
+
+    private function __construct()
     {
         $this->_checkPHPVersion(5.3);
 
@@ -24,7 +34,7 @@ class Config
 
         if ($this->config == null && json_last_error() != JSON_ERROR_NONE)
         {
-            throw new \LogicException(sprintf("Failed to parse config file '%s'. Error: '%s'", basename($this->file) , json_last_error_msg()));
+            throw new \LogicException(sprintf("Failed to parse config file '%s'.\nError: '%s'\n", basename($this->file) , json_last_error_msg()));
         }
     }
 
@@ -38,7 +48,9 @@ class Config
         $tab = $this->config;
         
         $explode = explode(':', $var);
-        
+        if (!$explode)
+            return false;
+
         foreach ($explode as $vartmp)
         {
             if (isset($tab[$vartmp]))
@@ -47,11 +59,11 @@ class Config
             }
         }
 
-        // return $tab == $this->config ? null : $tab;
-        return $tab;
+        // do not return all config if param is missing
+        return $tab == $this->config ? null : $tab;
     }
-    
-    
+
+
     /**
      * Returns all config variables
      */
@@ -80,7 +92,7 @@ class Config
     {
         if ($this->get('esm:check_updates') === false)
             return null;
-        
+
         $response       = null;
         $this_version   = $this->get('esm:version');
         $update_url     = $this->get('esm:website').'/esm-web/update/'.$this_version;

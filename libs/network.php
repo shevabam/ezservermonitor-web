@@ -1,12 +1,13 @@
 <?php
-require '../autoload.php';
+require __DIR__.'/../autoload.php';
+$config = Config::instance();
 
 $datas    = array();
 $network  = array();
 
 // Possible commands for ifconfig and ip
 $commands = array(
-    'ifconfig' => array('ifconfig', '/sbin/ifconfig', '/usr/bin/ifconfig', '/usr/sbin/ifconfig'),
+    'ifconfig' => array('/sbin/ifconfig', '/usr/bin/ifconfig', '/usr/sbin/ifconfig', 'ifconfig'),
     'ip'       => array('ip', '/bin/ip', '/sbin/ip', '/usr/bin/ip', '/usr/sbin/ip'),
 );
 
@@ -63,19 +64,24 @@ function getIpCommand($commands, $interface)
 
 $getInterfaces_cmd = getInterfacesCommand($commands);
 
-if (is_null($getInterfaces_cmd) || !(exec($getInterfaces_cmd, $getInterfaces)))
+if (is_null($getInterfaces_cmd) || !(Misc::exec($getInterfaces_cmd, $getInterfaces)))
 {
     $datas[] = array('interface' => 'N.A', 'ip' => 'N.A');
 }
 else
 {
+	if (!is_array($getInterfaces))
+	{
+		throw new Exception("command `$getInterfaces_cmd` didn't returned a valid result");
+	}
     foreach ($getInterfaces as $name)
     {
+        $name = trim($name);
         $ip = null;
 
-        $getIp_cmd = getIpCommand($commands, $name);        
+        $getIp_cmd = getIpCommand($commands, $name);
 
-        if (is_null($getIp_cmd) || !(exec($getIp_cmd, $ip)))
+        if (is_null($getIp_cmd) || !(Misc::exec($getIp_cmd, $ip)))
         {
             $network[] = array(
                 'name' => $name,
@@ -97,8 +103,8 @@ else
     foreach ($network as $interface)
     {
         // Get transmit and receive datas by interface
-        exec('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes', $getBandwidth_tx);
-        exec('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes', $getBandwidth_rx);
+        Misc::exec('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes', $getBandwidth_tx);
+        Misc::exec('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes', $getBandwidth_rx);
 
         $datas[] = array(
             'interface' => $interface['name'],
@@ -112,4 +118,5 @@ else
 }
 
 
-echo json_encode($datas);
+if (!isset($_SERVER['argv']) || !in_array('--quiet', $_SERVER['argv']))
+	echo json_encode($datas);
