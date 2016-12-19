@@ -373,6 +373,24 @@ catch(Exception $e)
             </div>
         </div>
 
+    <div class="t-center">
+        <div class="box column-left " id="esm-last_sftp_login">
+            <div class="box-header">
+                <h1>Last SSH/SFTP login</h1>
+                <ul>
+                    <li><a href="#" class="reload" onclick="esm.reloadBlock('last_sftp_login');"><span class="icon-cycle"></span></a></li>
+                </ul>
+            </div>
+            <div class="box-content">
+                <?php if ($Config->get('last_sftp_login:enable') == true): ?>
+                    <table>
+                        <tbody></tbody>
+                    </table>
+                <?php else: ?>
+                    <p>Disabled</p>
+                <?php endif; ?>
+            </div>
+        </div>
 
 
 
