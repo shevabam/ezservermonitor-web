@@ -7,7 +7,7 @@ $network  = array();
 
 // Possible commands for ifconfig and ip
 $commands = array(
-    'ifconfig' => array('ifconfig', '/sbin/ifconfig', '/usr/bin/ifconfig', '/usr/sbin/ifconfig'),
+    'ifconfig' => array('/sbin/ifconfig', '/usr/bin/ifconfig', '/usr/sbin/ifconfig', 'ifconfig'),
     'ip'       => array('ip', '/bin/ip', '/sbin/ip', '/usr/bin/ip', '/usr/sbin/ip'),
 );
 
@@ -70,11 +70,16 @@ if (is_null($getInterfaces_cmd) || !(Misc::exec($getInterfaces_cmd, $getInterfac
 }
 else
 {
+	if (!is_array($getInterfaces))
+	{
+		throw new Exception("command `$getInterfaces_cmd` didn't returned a valid result");
+	}
     foreach ($getInterfaces as $name)
     {
+        $name = trim($name);
         $ip = null;
 
-        $getIp_cmd = getIpCommand($commands, $name);        
+        $getIp_cmd = getIpCommand($commands, $name);
 
         if (is_null($getIp_cmd) || !(Misc::exec($getIp_cmd, $ip)))
         {

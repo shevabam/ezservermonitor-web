@@ -4,17 +4,17 @@ $config = Config::instance();
 
 $free = 0;
 
-if (Misc::shellexec('cat /proc/meminfo');
+if (Misc::shellexec($cmd = $config->get('memory:cmdMeminfo')))
 {
-    $free    = Misc::shellexec('grep MemFree /proc/meminfo | awk \'{print $2}\'');
-    $buffers = Misc::shellexec('grep Cached /proc/meminfo | awk \'{print $2}\'');
-    $cached  = Misc::shellexec('grep Cached /proc/meminfo | awk \'{print $2}\'');
+    $free    = Misc::shellexec($config->get('memory:cmdMemFree'));
+    $buffers = Misc::shellexec($config->get('memory:cmdBuffers'));
+    $cached  = Misc::shellexec($config->get('memory:cmdCached'));
 
     $free = (int)$free + (int)$buffers + (int)$cached;
 }
 
 // Total
-if (!($total = Misc::shellexec('grep MemTotal /proc/meminfo | awk \'{print $2}\'')))
+if (!($total = Misc::shellexec($config->get('memory:cmdMemTotal'))))
 {
     $total = 0;
 }

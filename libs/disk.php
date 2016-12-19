@@ -4,7 +4,9 @@ $config = Config::instance();
 
 $datas = array();
 
-if (!Misc::exec('/bin/df -T -P | awk -v c=`/bin/df -T | grep -bo "Type" | awk -F: \'{print $2}\'` \'{print substr($0,c);}\' | tail -n +2 | awk \'{print $1","$2","$3","$4","$5","$6","$7}\'', $df))
+$cmd = $config->get('disk:cmd');
+Misc::exec($cmd, $df);
+if (!$df)
 {
     $datas[] = array(
         'total'         => 'N.A',

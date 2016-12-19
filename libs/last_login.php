@@ -6,7 +6,7 @@ $datas = array();
 
 if ($config->get('last_login:enable'))
 {
-    if (!(Misc::exec('/usr/bin/lastlog --time 365 | /usr/bin/awk -F\' \' \'{ print $1" ("$3");"$5, $6, $9, $7}\'', $users)))
+    if (!(Misc::exec($config->get('last_login:cmd'), $users)))
     {
         $datas[] = array(
             'user' => 'N.A',
