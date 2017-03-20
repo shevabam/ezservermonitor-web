@@ -4,7 +4,7 @@ $Config = new Config();
 
 $datas = array();
 
-if (!(exec('/bin/df -T -P | sed -e \'s/[ \t]//\' | awk -v c=`/bin/df -T | grep -bo "Type" | awk -F: \'{print $2}\'` \'{print substr($0,c);}\' | tail -n +2 | awk \'{print $1","$2","$3","$4","$5","$6","$7}\'', $df)))
+if (!(exec('/bin/df -T -P | awk -v c=`/bin/df -T | grep -bo "Type" | awk -F: \'{print $2}\'` \'{print substr($0,c);}\' | tail -n +2 | awk \'{print $1","$2","$3","$4","$5","$6","$7}\'', $df)))
 {
     $datas[] = array(
         'total'         => 'N.A',
