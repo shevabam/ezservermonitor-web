@@ -249,7 +249,16 @@ esm.getPing = function() {
             var html = '';
             html += '<tr>';
             html += '<td>'+data[line].host+'</td>';
-            html += '<td>'+data[line].ping+' ms</td>';
+
+            html += '<td class="w15p"><span class="label ';
+            if (data[line].ping.indexOf('Inf') > -1) {
+              html += 'error">OFFLINE';
+            }
+            else {
+              html += 'success">'+data[line].ping+' ms';
+            }
+            html += '</span></td>'
+
             html += '</tr>';
 
             $box.append(html);
@@ -272,26 +281,74 @@ esm.getServices = function() {
 
         var $box = $('.box#esm-'+module+' .box-content tbody');
         $box.empty();
+		
+		var id = 0 ;
 
         for (var line in data)
         {
             var label_color  = data[line].status == 1 ? 'success' : 'error';
             var label_status = data[line].status == 1 ? 'online' : 'offline';
+			var label_gestion = data[line].status == 1 ? 'fa fa-stop"' : 'fa fa-play';
 
             var html = '';
             html += '<tr>';
             html += '<td class="w15p"><span class="label '+label_color+'">'+label_status+'</span></td>';
+			html += '<td><a class="reload spin disabled" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';
             html += '<td>'+data[line].name+'</td>';
             html += '<td class="w15p">'+data[line].port+'</td>';
             html += '</tr>';
 
             $box.append(html);
+			
+			id++;
         }
     
         esm.reloadBlock_spin(module);
 
     }, 'json');
 
+}
+
+esm.setServices = function(id) {
+	
+	var debug = false ;
+	var module = 'services';
+	
+	$("a[service="+id+"]").toggleClass('spin disabled');
+	 	
+		
+	$.get('libs/setservice.php?id='+id, function(resultat){ 
+	
+		// On actualise la ligne correspondant au service
+		
+		setTimeout(function() {
+			
+				$.get('libs/'+module+'.php', function(data) {
+
+						var $ligne = $("a[service="+id+"]").parent("td").parent("tr");
+						$ligne.empty();
+						
+							var label_color  = data[id].status == 1 ? 'success' : 'error';
+							var label_status = data[id].status == 1 ? 'online' : 'offline';
+							var label_gestion = data[id].status == 1 ? 'fa fa-stop"' : 'fa fa-play';
+
+							var html = '';
+							html += '<td class="w15p"><span class="label '+label_color+'">'+label_status+'</span></td>';
+							html += '<td><a class="reload" service='+id+' onclick="esm.setServices('+id+');"><span class="'+label_gestion+'"></span></a></td>';
+							html += '<td>'+data[id].name+'</td>';
+							html += '<td class="w15p">'+data[id].port+'</td>';
+
+							$ligne.append(html);
+
+					}, 'json');
+			
+		},15); // on attend un certains temps afin d'être sur que la commande ait été appliqué.
+		
+		if(debug) console.log(resultat);
+
+	});
+	
+	
 }
 
 
@@ -367,5 +424,5 @@ esm.mapping = {
     last_login: esm.getLast_login,
     network: esm.getNetwork,
     ping: esm.getPing,
-    services: esm.getServices
+    services: esm.getServices,
 };

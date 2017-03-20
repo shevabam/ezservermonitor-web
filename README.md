@@ -1,3 +1,7 @@
+Fork de eZ Server Monitor : on peut désormais arrêter ou démarrer un service depuis l'interface web. Pour plus d'info voir http://mondedie.fr/viewtopic.php?id=7350
+
+![](http://images.mondedie.fr/images/services.png)
+
 [eZ Server Monitor](http://www.ezservermonitor.com) (eSM) is a script for monitoring Linux servers. It is available in [Bash](http://www.ezservermonitor.com/esm-sh/features) version and [Web](http://www.ezservermonitor.com/esm-web/features) application.
 
 # eZ Server Monitor `Web

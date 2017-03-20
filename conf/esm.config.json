@@ -4,7 +4,7 @@
         "website": "http://www.ezservermonitor.com",
         "check_updates": true,
         "auto_refresh": 0,
-        "theme": "blue",
+        "theme": "green",
         "custom_title": ""
     },
     "cpu": {
@@ -32,37 +32,50 @@
                 "name": "Web Server",
                 "host": "localhost",
                 "port": 80,
-                "protocol": "tcp"
+                "protocol": "tcp",
+		"stop": "",
+		"start": "service nginx start"
+            },
+			{
+                "name": "CakeBox",
+                "host": "localhost",
+                "port": 81,
+                "protocol": "tcp",
+		"stop": "",
+		"start": ""
             },
             {
-                "name": "Email Server (incoming)",
+                "name": "Rutorrent Cyprien",
                 "host": "localhost",
-                "port": 993,
-                "protocol": "tcp"
+                "port": 5001,
+                "protocol": "tcp",
+		"stop": "service cyprien-rtorrent stop",
+		"start": "service cyprien-rtorrent start"
             },
             {
-                "name": "Email Server (outgoing)",
+                "name": "SickRage Cyprien",
                 "host": "localhost",
-                "port": 587,
-                "protocol": "tcp"
+                "port": 8081,
+                "protocol": "tcp",
+		"stop": "docker stop sickrage-cyprien",
+		"start": "docker start sickrage-cyprien"
             },
-            {
-                "name": "FTP Server",
+			{
+                "name": "CouchPotato Cyprien",
                 "host": "localhost",
-                "port": 21,
-                "protocol": "tcp"
-            },
-            {
-                "name": "Database Server",
-                "host": "localhost",
-                "port": 3306,
-                "protocol": "tcp"
+                "port": 5050,
+                "protocol": "tcp",
+		"stop": "docker stop couchpotato-cyprien",
+		"start": "docker start couchpotato-cyprien"
             },
             {
                 "name": "SSH",
                 "host": "localhost",
                 "port": 22,
-                "protocol": "tcp"
+                "protocol": "tcp",
+		"stop": "",
+		"start": "/etc/init.d/ssh start"
+				
             }
         ]
     }
