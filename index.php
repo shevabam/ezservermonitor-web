@@ -44,7 +44,7 @@ $update = $Config->checkUpdate();
 
 <nav role="main">
     <div id="appname">
-        <a href="index.php"><span class="icon-gauge"></span>eSM</a>
+        <a href="index.php"><span class="icon-gauge"></span>eSM PL</a>
         <a href="<?php echo $Config->get('esm:website'); ?>"><span class="subtitle">eZ Server Monitor - v<?php echo $Config->get('esm:version'); ?></span></a>
     </div>
 
@@ -59,7 +59,7 @@ $update = $Config->checkUpdate();
 
     <?php if (!is_null($update)): ?>
         <div id="update">
-            <a href="<?php echo $update['fullpath']; ?>">New version available (<?php echo $update['availableVersion']; ?>) ! Click here to download</a>
+            <a href="<?php echo $update['fullpath']; ?>">Nowa wersja dostępna (<?php echo $update['availableVersion']; ?>) ! Kliknij tutaj aby pobrać</a>
         </div>
     <?php endif; ?>
 
@@ -91,7 +91,7 @@ $update = $Config->checkUpdate();
                         <td id="system-os"></td>
                     </tr>
                     <tr>
-                        <td>Kernel version</td>
+                        <td>Wersja jądra</td>
                         <td id="system-kernel"></td>
                     </tr>
                     <tr>
@@ -99,15 +99,15 @@ $update = $Config->checkUpdate();
                         <td id="system-uptime"></td>
                     </tr>
                     <tr>
-                        <td>Last boot</td>
+                        <td>Ostatnie bootowanie</td>
                         <td id="system-last_boot"></td>
                     </tr>
                     <tr>
-                        <td>Current user(s)</td>
+                        <td>Zalogowani użytkownicy</td>
                         <td id="system-current_users"></td>
                     </tr>
                     <tr>
-                        <td>Server date & time</td>
+                        <td>Data i czas na serwerze</td>
                         <td id="system-server_date"></td>
                     </tr>
                 </tbody>
@@ -117,7 +117,7 @@ $update = $Config->checkUpdate();
 
     <div class="box column-right" id="esm-load_average">
         <div class="box-header">
-            <h1>Load Average</h1>
+            <h1>Obciążenie</h1>
             <ul>
                 <li><a href="#" class="reload" onclick="esm.reloadBlock('load_average');"><span class="icon-cycle"></span></a></li>
             </ul>
@@ -159,11 +159,11 @@ $update = $Config->checkUpdate();
                         <td id="cpu-model"></td>
                     </tr>
                     <tr>
-                        <td>Cores</td>
+                        <td>Rdzenie</td>
                         <td id="cpu-num_cores"></td>
                     </tr>
                     <tr>
-                        <td>Speed</td>
+                        <td>Zegar</td>
                         <td id="cpu-frequency"></td>
                     </tr>
                     <tr>
@@ -176,7 +176,7 @@ $update = $Config->checkUpdate();
                     </tr>
                     <?php if ($Config->get('cpu:enable_temperature')): ?>
                         <tr>
-                            <td>Temperature</td>
+                            <td>Temperatura</td>
                             <td id="cpu-temp"></td>
                         </tr>
                     <?php endif; ?>
@@ -189,7 +189,7 @@ $update = $Config->checkUpdate();
 
     <div class="box column-left" id="esm-network">
         <div class="box-header">
-            <h1>Network usage</h1>
+            <h1>Wykorzystanie sieci</h1>
             <ul>
                 <li><a href="#" class="reload" onclick="esm.reloadBlock('network');"><span class="icon-cycle"></span></a></li>
             </ul>
@@ -199,10 +199,10 @@ $update = $Config->checkUpdate();
             <table>
                 <thead>
                     <tr>
-                        <th class="w15p">Interface</th>
+                        <th class="w15p">Interfejs</th>
                         <th class="w20p">IP</th>
-                        <th>Receive</th>
-                        <th>Transmit</th>
+                        <th>Pobrano</th>
+                        <th>Wysłano</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -217,7 +217,7 @@ $update = $Config->checkUpdate();
 
     <div class="box" id="esm-disk">
         <div class="box-header">
-            <h1>Disk usage</h1>
+            <h1>Wykorzystanie dysku</h1>
             <ul>
                 <li><a href="#" class="reload" onclick="esm.reloadBlock('disk');"><span class="icon-cycle"></span></a></li>
             </ul>
@@ -232,9 +232,9 @@ $update = $Config->checkUpdate();
                         <?php endif; ?>
                         <th class="w20p">Mount</th>
                         <th>Use</th>
-                        <th class="w15p">Free</th>
-                        <th class="w15p">Used</th>
-                        <th class="w15p">Total</th>
+                        <th class="w15p">Wolne</th>
+                        <th class="w15p">Zajęte</th>
+                        <th class="w15p">Łączniel</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -249,7 +249,7 @@ $update = $Config->checkUpdate();
 
     <div class="box column-left" id="esm-memory">
         <div class="box-header">
-            <h1>Memory</h1>
+            <h1>RAM</h1>
             <ul>
                 <li><a href="#" class="reload" onclick="esm.reloadBlock('memory');"><span class="icon-cycle"></span></a></li>
             </ul>
@@ -259,19 +259,19 @@ $update = $Config->checkUpdate();
             <table class="firstBold">
                 <tbody>
                     <tr>
-                        <td class="w20p">Used %</td>
+                        <td class="w20p">Wykorzystanie %</td>
                         <td><div class="progressbar-wrap"><div class="progressbar" style="width: 0%;">0%</div></div></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Used</td>
+                        <td class="w20p">Wykorzystanie</td>
                         <td id="memory-used"></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Free</td>
+                        <td class="w20p">Wolne</td>
                         <td id="memory-free"></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Total</td>
+                        <td class="w20p">Łącznie</td>
                         <td id="memory-total"></td>
                     </tr>
                 </tbody>
@@ -291,19 +291,19 @@ $update = $Config->checkUpdate();
             <table class="firstBold">
                 <tbody>
                     <tr>
-                        <td class="w20p">Used %</td>
+                        <td class="w20p">Wykorzystanie %</td>
                         <td><div class="progressbar-wrap"><div class="progressbar" style="width: 0%;">0%</div></div></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Used</td>
+                        <td class="w20p">Wykorzystanie</td>
                         <td id="swap-used"></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Free</td>
+                        <td class="w20p">Wolne</td>
                         <td id="swap-free"></td>
                     </tr>
                     <tr>
-                        <td class="w20p">Total</td>
+                        <td class="w20p">Łącznie</td>
                         <td id="swap-total"></td>
                     </tr>
                 </tbody>
@@ -339,7 +339,7 @@ $update = $Config->checkUpdate();
 
         <div class="box column-right column-33" id="esm-services">
             <div class="box-header">
-                <h1>Services status</h1>
+                <h1>Usługi</h1>
                 <ul>
                     <li><a href="#" class="reload" onclick="esm.reloadBlock('services');"><span class="icon-cycle"></span></a></li>
                 </ul>

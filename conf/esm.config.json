@@ -29,31 +29,31 @@
         "show_port": true,
         "list": [
             {
-                "name": "Web Server",
+                "name": "Serwer WWW",
                 "host": "localhost",
                 "port": 80,
                 "protocol": "tcp"
             },
             {
-                "name": "Email Server (incoming)",
+                "name": "Serwer poczty (przychodzące)",
                 "host": "localhost",
                 "port": 993,
                 "protocol": "tcp"
             },
             {
-                "name": "Email Server (outgoing)",
+                "name": "Serwer poczty (wychodzące)",
                 "host": "localhost",
                 "port": 587,
                 "protocol": "tcp"
             },
             {
-                "name": "FTP Server",
+                "name": "Serwer FTP",
                 "host": "localhost",
                 "port": 21,
                 "protocol": "tcp"
             },
             {
-                "name": "Database Server",
+                "name": "Serwer SQL",
                 "host": "localhost",
                 "port": 3306,
                 "protocol": "tcp"
