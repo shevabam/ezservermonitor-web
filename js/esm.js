@@ -201,6 +201,35 @@ esm.getLast_login = function() {
 
 }
 
+esm.getLast_sftp_login = function() {
+
+    var module = 'last_sftp_login';
+    
+    esm.reloadBlock_spin(module);
+
+    $.get('libs/'+module+'.php', function(data) {
+
+        var $box = $('.box#esm-'+module+' .box-content tbody');
+        $box.empty();
+
+        for (var line in data)
+        {
+            var html = '';
+            html += '<tr>';
+            html += '<td>'+data[line].user+'</td>';
+            html += '<td class="w50p">'+data[line].date+'</td>';
+            html += '<td class="w50p">'+data[line].src+'</td>';
+            html += '</tr>';
+
+            $box.append(html);
+        }
+    
+        esm.reloadBlock_spin(module);
+
+    }, 'json');
+
+}
+
 
 esm.getNetwork = function() {
 
@@ -249,7 +278,16 @@ esm.getPing = function() {
             var html = '';
             html += '<tr>';
             html += '<td>'+data[line].host+'</td>';
-            html += '<td>'+data[line].ping+' ms</td>';
+
+            html += '<td class="w15p"><span class="label ';
+            if (data[line].ping.indexOf('Inf') > -1) {
+              html += 'error">OFFLINE';
+            }
+            else {
+              html += 'success">'+data[line].ping+' ms';
+            }
+            html += '</span></td>'
+
             html += '</tr>';
 
             $box.append(html);
@@ -303,9 +341,11 @@ esm.getAll = function() {
     esm.getSwap();
     esm.getDisk();
     esm.getLast_login();
+    esm.getLast_sftp_login();
     esm.getNetwork();
     esm.getPing();
     esm.getServices();
+    esm.getLastCron();
 }
 
 esm.reloadBlock = function(block) {
@@ -355,6 +395,21 @@ esm.reconfigureGauge = function($gauge, newValue) {
     $gauge.val(newValue).trigger('change');
 }
 
+esm.getLastCron = function() {
+
+    var module = 'last_cron';
+    esm.reloadBlock_spin(module);
+    $.get('libs/'+module+'.php', function(data) {
+        var $box = $('#lastCron .seconds');
+
+        $box.text(data);
+
+        esm.reloadBlock_spin(module);
+
+    }, 'json');
+
+}
+
 
 esm.mapping = {
     all: esm.getAll,
@@ -365,7 +420,9 @@ esm.mapping = {
     swap: esm.getSwap,
     disk: esm.getDisk,
     last_login: esm.getLast_login,
+    last_sftp_login: esm.getLast_sftp_login,
     network: esm.getNetwork,
     ping: esm.getPing,
-    services: esm.getServices
+    services: esm.getServices,
+    lastCron: esm.getLastCron
 };

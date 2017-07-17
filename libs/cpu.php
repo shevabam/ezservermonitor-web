@@ -1,6 +1,6 @@
 <?php
-require '../autoload.php';
-$Config = new Config();
+require __DIR__.'/../autoload.php';
+$config = Config::instance();
 
 // Number of cores
 $num_cores = Misc::getCpuCoresNumber();
@@ -13,7 +13,7 @@ $cache      = 'N.A';
 $bogomips   = 'N.A';
 $temp       = 'N.A';
 
-if ($cpuinfo = shell_exec('cat /proc/cpuinfo'))
+if ($cpuinfo = Misc::shellexec('cat /proc/cpuinfo'))
 {
     $processors = preg_split('/\s?\n\s?\n/', trim($cpuinfo));
 
@@ -54,7 +54,8 @@ if ($cpuinfo = shell_exec('cat /proc/cpuinfo'))
 
 if ($frequency == 'N.A')
 {
-    if ($f = shell_exec('cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq'))
+    $cmd = $config->get('cpu:cmdMaxFreq');
+    if ($f = Misc::shellexec($cmd))
     {
         $f = $f / 1000;
         $frequency = $f.' MHz';
@@ -62,16 +63,18 @@ if ($frequency == 'N.A')
 }
 
 // CPU Temp
-if ($Config->get('cpu:enable_temperature'))
+if ($config->get('cpu:enable_temperature'))
 {
-    if (file_exists('/usr/bin/sensors') && exec('/usr/bin/sensors | grep -E "^(CPU Temp|Core 0)" | cut -d \'+\' -f2 | cut -d \'.\' -f1', $t))
+	$cmd = $config->get('cpu:cmdTemperature');
+    if (Misc::exec($cmd, $t))
     {
         if (isset($t[0]))
             $temp = $t[0].' °C';
     }
     else
     {
-        if (exec('cat /sys/class/thermal/thermal_zone0/temp', $t))
+        $cmd = $config->get('cpu:cmdThermal');
+        if (Misc::exec($cmd, $t))
         {
             $temp = round($t[0] / 1000).' °C';
         }
@@ -88,4 +91,5 @@ $datas = array(
     'temp'       => $temp,
 );
 
-echo json_encode($datas);
+if (!isset($_SERVER['argv']) || !in_array('--quiet', $_SERVER['argv']))
+	echo json_encode($datas);

@@ -1,7 +1,9 @@
 <?php
-require '../autoload.php';
+require __DIR__.'/../autoload.php';
 
-if (!($load_tmp = shell_exec('cat /proc/loadavg | awk \'{print $1","$2","$3}\'')))
+$config = Config::instance();
+
+if (!($load_tmp = Misc::shellexec($config->get('load_average:cmd'))))
 {
     $load = array(0, 0, 0);
 }
@@ -10,11 +12,12 @@ else
     // Number of cores
     $cores = Misc::getCpuCoresNumber();
 
-    $load_exp = explode(',', $load_tmp);
+    $load_exp = explode(' ', $load_tmp);
+    //var_dump($load_exp);
 
     $load = array_map(
         function ($value, $cores) {
-            $v = (int)($value * 100 / $cores);
+            $v = ($value * 100 / $cores);
             if ($v > 100)
                 $v = 100;
             return $v;
@@ -27,4 +30,5 @@ else
 
 $datas = $load;
 
-echo json_encode($datas);
+if (!isset($_SERVER['argv']) || !in_array('--quiet', $_SERVER['argv']))
+	echo json_encode($datas);

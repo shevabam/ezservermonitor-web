@@ -1,24 +1,24 @@
 <?php
-require '../autoload.php';
-$Config = new Config();
+require __DIR__.'/../autoload.php';
+$config = Config::instance();
 
 
 $datas = array();
 
-if (count($Config->get('ping:hosts')) > 0)
-    $hosts = $Config->get('ping:hosts');
+if (count($config->get('ping:hosts')) > 0)
+    $hosts = $config->get('ping:hosts');
 else
     $hosts = array('google.com', 'wikipedia.org');
 
 foreach ($hosts as $host)
 {
-    exec('/bin/ping -qc 1 '.$host.' | awk -F/ \'/^rtt/ { print $5 }\'', $result);
+    Misc::exec('/bin/ping -qc 1 '.$host.' | awk -F/ \'/^rtt/ { print $5 }\'', $result);
 
     if (!isset($result[0]))
     {
-        $result[0] = 0;
+        $result[0] = "+Infinity";
     }
-    
+
     $datas[] = array(
         'host' => $host,
         'ping' => $result[0],
@@ -27,4 +27,5 @@ foreach ($hosts as $host)
     unset($result);
 }
 
-echo json_encode($datas);
+if (!isset($_SERVER['argv']) || !in_array('--quiet', $_SERVER['argv']))
+    echo json_encode($datas);
