@@ -6,11 +6,11 @@ date_default_timezone_set(@date_default_timezone_get());
 $hostname = php_uname('n');
 
 // OS
-if (!($os = shell_exec('/usr/bin/lsb_release -ds | cut -d= -f2 | tr -d \'"\'')))
+if (!file_exists('/usr/bin/lsb_release') || !($os = shell_exec('/usr/bin/lsb_release -ds | cut -d= -f2 | tr -d \'"\'')))
 {
-    if (!($os = shell_exec('cat /etc/system-release | cut -d= -f2 | tr -d \'"\'')))
+    if (!file_exists('/etc/system-release') || !($os = shell_exec('cat /etc/system-release | cut -d= -f2 | tr -d \'"\'')))
     {
-        if (!($os = shell_exec('cat /etc/os-release | grep PRETTY_NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
+        if (!file_exists('/etc/os-release') || !($os = shell_exec('cat /etc/os-release | grep PRETTY_NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
         {
             if (!($os = shell_exec('find /etc/*-release -type f -exec cat {} \; | grep PRETTY_NAME | tail -n 1 | cut -d= -f2 | tr -d \'"\'')))
             {

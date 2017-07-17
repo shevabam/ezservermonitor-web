@@ -64,7 +64,7 @@ if ($frequency == 'N.A')
 // CPU Temp
 if ($Config->get('cpu:enable_temperature'))
 {
-    if (exec('/usr/bin/sensors | grep -E "^(CPU Temp|Core 0)" | cut -d \'+\' -f2 | cut -d \'.\' -f1', $t))
+    if (file_exists('/usr/bin/sensors') && exec('/usr/bin/sensors | grep -E "^(CPU Temp|Core 0)" | cut -d \'+\' -f2 | cut -d \'.\' -f1', $t))
     {
         if (isset($t[0]))
             $temp = $t[0].' °C';
