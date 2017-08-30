@@ -2,6 +2,19 @@
 require 'autoload.php';
 $Config = new Config();
 $update = $Config->checkUpdate();
+
+if (!$Config->get('login:enable'))
+    $_SESSION["username"]="login_disabled";
+else if ( isset($_POST["cmd"]) && $_POST["cmd"]=="Login") {
+	if (isset($_POST["username"]) && $_POST["username"]==$Config->get('login:username')
+		&&
+		isset($_POST["password"]) && hash("sha256", $_POST["password"])==$Config->get('login:sha256pass')){
+		$_SESSION["username"]=$_POST["username"];
+	}else{
+		header("Location:?err=true");
+		exit;
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,6 +83,39 @@ $update = $Config->checkUpdate();
 
 
 <div id="main-container">
+
+
+    <?php if (!isset($_SESSION["username"])): ?>
+        <div class="box">
+            <form method="POST" action="">
+                <div class="box-header">
+                    <h1>Login</h1>
+                    <ul>
+                        <li><a href="#" class="reload" onclick='$("#submitbtn").click()'><span class="icon-play"></span></a></li>
+                    </ul>
+                </div>
+                <div class="box-content">
+                    <table class="firstBold">
+                        <tbody>
+                            <tr>
+                                <td>Username</td>
+                                <td><input class="input" name="username" type="text" placeholder="Username"></td>
+                            </tr>
+                            <tr>
+                                <td>Password</td>
+                                <td><input class="input" name="password" type="password" placeholder="Password"></td>
+                            </tr>
+                            <?php if (isset($_GET["err"])): ?>
+                                <td><li style="color:red;list-style:none;"><span class="icon-warning"></span> Wrong username or password.</li><td>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                    <input id=submitbtn class="box-header button" type="submit" name="cmd" class="btn btn-primary signup" value="Login">
+                </div>
+            </form>
+        </div>
+    <?php else: ?>
+
 
     <div class="box column-left" id="esm-system">
         <div class="box-header">
@@ -372,7 +418,7 @@ $update = $Config->checkUpdate();
 
     </div>
 
-    
+    <?php endif; ?>
 
     <div class="cls"></div>
 
