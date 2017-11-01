@@ -11,7 +11,6 @@
         "enable_temperature": true
     },
     "disk": {
-        "enable": true,
         "show_tmpfs": false,
         "show_filesystem": true
     },
