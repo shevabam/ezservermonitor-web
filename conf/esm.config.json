@@ -12,7 +12,8 @@
     },
     "disk": {
         "show_tmpfs": false,
-        "show_filesystem": true
+        "show_filesystem": true,
+        "ignore_mounts": []
     },
     "ping": {
         "hosts": [
