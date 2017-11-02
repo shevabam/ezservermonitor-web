@@ -32,6 +32,12 @@ else
         if (strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false)
             continue;
 
+        foreach ($Config->get('disk:ignore_mounts') as $to_ignore)
+        {
+            if ($mount === $to_ignore)
+                continue 2;
+        }
+
         if (!in_array($mount, $mounted_points))
         {
             $mounted_points[] = trim($mount);
