@@ -17,6 +17,7 @@ if (!($total = shell_exec('grep MemTotal /proc/meminfo | awk \'{print $2}\'')))
 {
     $total = 0;
 }
+$total = (int)$total;
 
 // Used
 $used = $total - $free;

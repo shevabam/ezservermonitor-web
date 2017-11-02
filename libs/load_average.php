@@ -14,7 +14,7 @@ else
 
     $load = array_map(
         function ($value, $cores) {
-            $v = (int)($value * 100 / $cores);
+            $v = (int)((float)$value * 100 / $cores);
             if ($v > 100)
                 $v = 100;
             return $v;

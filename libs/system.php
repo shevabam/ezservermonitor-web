@@ -35,7 +35,7 @@ if (!($totalSeconds = shell_exec('/usr/bin/cut -d. -f1 /proc/uptime')))
 }
 else
 {
-    $uptime = Misc::getHumanTime($totalSeconds);
+    $uptime = Misc::getHumanTime((int)$totalSeconds);
 }
 
 // Last boot

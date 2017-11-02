@@ -6,12 +6,14 @@ if (!($free = shell_exec('grep SwapFree /proc/meminfo | awk \'{print $2}\'')))
 {
     $free = 0;
 }
+$free = (int)$free;
 
 // Total
 if (!($total = shell_exec('grep SwapTotal /proc/meminfo | awk \'{print $2}\'')))
 {
     $total = 0;
 }
+$total = (int)$total;
 
 // Used
 $used = $total - $free;
