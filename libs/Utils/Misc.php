@@ -138,7 +138,6 @@ class Misc
         return $return;
     }
 
-
     /**
      * Allows to pluralize a word based on a number
      * Ex : echo 'mot'.Misc::pluralize(5); ==> prints mots
