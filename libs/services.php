@@ -75,14 +75,14 @@ if (count($Config->get('services:list')) > 0)
                 $detail = $binary;
             }
         }
-        elseif($check_port)
+        elseif($check_port === true)
         {
             if($show_port === true)
             {
                 $detail = $protocol . ":" . $port;
             }
         }
-        elseif($check_binary)
+        elseif($check_binary === true)
         {
             $detail = $binary;
         }
