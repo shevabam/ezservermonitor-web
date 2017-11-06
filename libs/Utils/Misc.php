@@ -156,6 +156,7 @@ class Misc
     }
 
 
+
     /**
      * Checks if a port is open (TCP or UPD)
      *
@@ -171,10 +172,15 @@ class Misc
         {
             $handle = @fsockopen($host, $port, $errno, $errstr, $timeout);
 
-            if ($handle)
-                return true;
-            else
+            if (!$handle)
+            {
                 return false;
+            }
+            else
+            {
+                fclose($handle);
+                return true;
+            }
         }
         elseif ($protocol == 'udp')
         {
