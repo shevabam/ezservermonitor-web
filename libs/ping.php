@@ -12,7 +12,7 @@ else
 
 foreach ($hosts as $host)
 {
-    exec('/bin/ping -qc 1 '.$host.' | awk -F/ \'/^rtt/ { print $5 }\'', $result);
+    exec('/bin/ping -qc 1 '.$host.' | awk -F/ \'/^(rtt|round-trip)/ { print $5 }\'', $result);
 
     if (!isset($result[0]))
     {
