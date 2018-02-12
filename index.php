@@ -174,6 +174,14 @@ $update = $Config->checkUpdate();
                         <td>Bogomips</td>
                         <td id="cpu-bogomips"></td>
                     </tr>
+                    <tr>
+                        <td>Running Processes</td>
+                        <td id="cpu-runningproc"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Processes</td>
+                        <td id="cpu-totalproc"></td>
+                    </tr>
                     <?php if ($Config->get('cpu:enable_temperature')): ?>
                         <tr>
                             <td>Temperature</td>
