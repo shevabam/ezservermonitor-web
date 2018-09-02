@@ -32,6 +32,9 @@ else
         if (strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false)
             continue;
 
+        if (strpos($filesystem, '/dev/loop') !== false && $Config->get('disk:show_loop') === false)
+            continue;
+
         foreach ($Config->get('disk:ignore_mounts') as $to_ignore)
         {
             if ($mount === $to_ignore)

@@ -12,6 +12,7 @@
     },
     "disk": {
         "show_tmpfs": false,
+        "show_loop": false,
         "show_filesystem": true,
         "ignore_mounts": []
     },
