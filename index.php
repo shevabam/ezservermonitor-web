@@ -337,7 +337,24 @@ $update = $Config->checkUpdate();
             </div>
         </div>
 
+        <div class="box column-left column-33" id="esm-pistatus">
+            <div class="box-header">
+                <h1>Pi status</h1>
+                <ul>
+                    <li><a href="#" class="reload" onclick="esm.reloadBlock('pistatus');"><span class="icon-cycle"></span></a></li>
+                </ul>
+            </div>
 
+            <div class="box-content">
+                <?php if ($Config->get('pistatus:enable') == true): ?>
+                    <table>
+                        <tbody></tbody>
+                    </table>
+                <?php else: ?>
+                    <p>Disabled</p>
+                <?php endif; ?>
+            </div>
+        </div>
 
         <div class="box column-right column-33" id="esm-services">
             <div class="box-header">
