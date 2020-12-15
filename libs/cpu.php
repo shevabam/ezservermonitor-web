@@ -56,7 +56,7 @@ if ($frequency == 'N.A')
 {
     if ($f = shell_exec('cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq'))
     {
-        $f = $f / 1000;
+        $f = (int)$f / 1000;
         $frequency = $f.' MHz';
     }
 }
