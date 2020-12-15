@@ -124,7 +124,7 @@ class Misc
 
         foreach ($cmds as $cmd)
         {
-            if (trim(shell_exec($cmd.$args)) != '')
+            if (trim(shell_exec($cmd.' 2>/dev/null '.$args)) != '')
             {
                 $return = $cmd;
                 
