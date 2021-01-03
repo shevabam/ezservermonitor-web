@@ -27,6 +27,9 @@
         "enable": true,
         "max": 5
     },
+    "pistatus": {
+        "enable": false
+    },
     "services": {
         "show_port": true,
         "list": [
