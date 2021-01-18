@@ -12,6 +12,8 @@ $frequency  = 'N.A';
 $cache      = 'N.A';
 $bogomips   = 'N.A';
 $temp       = 'N.A';
+$runningproc= 'N.A';
+$totalproc  = 'N.A';
 
 if ($cpuinfo = shell_exec('cat /proc/cpuinfo'))
 {
@@ -78,6 +80,18 @@ if ($Config->get('cpu:enable_temperature'))
     }
 }
 
+//Process running / total
+if (!($processestmp=shell_exec('cat /proc/loadavg | awk \'{print $4}\'')))
+{
+	$processes=0;
+}
+else
+{
+	$procsplit=explode("/",$processestmp);
+	$runningproc=(int)$procsplit[0];
+	$totalproc=(int)$procsplit[1];
+}
+
 
 $datas = array(
     'model'      => $model,
@@ -86,6 +100,8 @@ $datas = array(
     'cache'      => $cache,
     'bogomips'   => $bogomips,
     'temp'       => $temp,
+    'runningproc'=> $runningproc,
+    'totalproc'  => $totalproc,
 );
 
 echo json_encode($datas);
