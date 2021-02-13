@@ -317,6 +317,7 @@ $update = $Config->checkUpdate();
     <div class="cls"></div>
 
 
+    <?php if ($Config->get('last_login:enable') == true): ?>
     <div class="t-center">
         <div class="box column-left column-33" id="esm-last_login">
             <div class="box-header">
@@ -327,18 +328,15 @@ $update = $Config->checkUpdate();
             </div>
 
             <div class="box-content">
-                <?php if ($Config->get('last_login:enable') == true): ?>
                     <table>
                         <tbody></tbody>
                     </table>
-                <?php else: ?>
-                    <p>Disabled</p>
-                <?php endif; ?>
             </div>
         </div>
+    <?php endif; ?>
 
 
-
+    <?php if ($Config->get('services:enable') == true): ?>
         <div class="box column-right column-33" id="esm-services">
             <div class="box-header">
                 <h1>Services status</h1>
@@ -353,10 +351,11 @@ $update = $Config->checkUpdate();
                 </table>
             </div>
         </div>
+    <?php endif; ?>
 
 
 
-
+     <?php if ($Config->get('ping:enable') == true): ?>
         <div class="box t-center" style="margin: 0 33%;" id="esm-ping">
             <div class="box-header">
                 <h1>Ping</h1>
@@ -371,6 +370,7 @@ $update = $Config->checkUpdate();
                 </table>
             </div>
         </div>
+    <?php endif; ?>
 
     </div>
 
