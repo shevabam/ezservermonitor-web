@@ -374,7 +374,22 @@ $update = $Config->checkUpdate();
 
     </div>
 
-    
+    <?php if ($Config->get('package_management:apt') == true): ?>
+    <div class="box column-left column-33" id="esm-apt">
+        <div class="box-header">
+            <h1>Package Update Status</h1>
+            <ul>
+                <li><a href="#" class="reload" onclick="esm.reloadBlock('apt');"><span class="icon-cycle"></span></a></li>
+            </ul>
+        </div>
+
+        <div class="box-content">
+            <table>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <?php endif; ?>
 
     <div class="cls"></div>
 
