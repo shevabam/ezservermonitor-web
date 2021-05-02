@@ -282,7 +282,7 @@ esm.getServices = function() {
             html += '<tr>';
             html += '<td class="w15p"><span class="label '+label_color+'">'+label_status+'</span></td>';
             html += '<td>'+data[line].name+'</td>';
-            html += '<td class="w15p">'+data[line].port+'</td>';
+            html += '<td>'+data[line].detail+'</td>';
             html += '</tr>';
 
             $box.append(html);
