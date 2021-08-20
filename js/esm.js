@@ -306,6 +306,8 @@ esm.getAptStatus = function() {
 	var html = '';
 
         if( data.status === 0 ) {
+            console.log("apt-status", data);
+
             var package_color = data.standard > 0 ? 'label success' : '';
             var security_color = data.security > 0 ? 'label error' : '';
 

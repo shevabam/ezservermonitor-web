@@ -69,6 +69,6 @@
         ]
     },
     "package_management": {
-        "apt": false
+        "apt": true
      }
 }
