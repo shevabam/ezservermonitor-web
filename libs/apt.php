@@ -23,8 +23,14 @@ $Config = new Config();
     
     'apt-get' notes:
     * The command `apt-get update` **must** be run before this will report the correct number of 
-        packages. As this will need to be run with super user privaleges, it is recommended that a
+        packages. As this will need to be run with super user privileges, it is recommended that a
         simple cron job or timer script be configured for this job.
+    * It is possible to enable it directly by putting 'apt_update_before_check' parameter to true.
+        Note that you'll then need to grant sudo apt-get rights to www-data:
+        `sudo visudo`
+        `www-data ALL=(ALL) NOPASSWD: /bin/apt-get`
+        <!> ACTIVATING IT MAY HAVE IMPACT ON SECURITY OF YOUR COMPUTER SO USE IT WITH CAUTION
+        <!> THIS APPROACH WILL ALSO SLOW DOWN PAGE LOAD
     * The `apt-get` approach is used if the `apt-check` command cannot be found. Most likely, it 
         means that this script is not running in an Ubuntu environment.
     * Basically, this calls and filters 'apt-get --simulate dist-upgrade'. If this call is 
@@ -54,6 +60,7 @@ $Config = new Config();
 */
 
 $configKey = 'package_management:apt';
+$optionalUpdateKey = 'package_management:apt_update_before_check';
 
 // The command paths. Intentionally not configurable to prevent remote execution bugs.
 $apt_get_root_path = '/bin/apt-get';
@@ -70,8 +77,8 @@ if(file_exists($apt_get_root_path)) {
 
 $datas = array();
 
-// TODO Determine how to test for the existance of a key before trying to access it. If you load a
-// non-existant key with $Config->get($configKey), you'll get the entire configuration back. If you
+// TODO Determine how to test for the existence of a key before trying to access it. If you load a
+// non-existent key with $Config->get($configKey), you'll get the entire configuration back. If you
 // try to load a partially existing key (e.g. the 'package_management' header exists but not the
 // 'apt' key) you'll get nothing back. Return a status of -1, message of 'not configured'.
 if ($Config->get($configKey) == false ) {
@@ -99,6 +106,16 @@ if ($Config->get($configKey) == false ) {
             $datas['message'] = 'apt-check failure - error code ' . $retval;
         }
     } else if ( $apt_get_path != '' && file_exists($apt_get_path) && is_executable($apt_get_path) ) {
+        // If requested in config, update apt (getting latest infos from apt server) before doing an apt.
+        // WARNING (security potential issue): sudo apt-get will then need to be allowed for www-data user
+        if ($Config->get($optionalUpdateKey) == true) {
+            $updateCommand = 'sudo --non-interactive ' . $apt_get_path . ' --quiet --yes update';
+            $execresult = exec($updateCommand, $output, $retval);
+            if ( $retval != 0 ) {
+                error_log("Failed to execute '$updateCommand' from php script");
+            }
+        }
+
         $command_path = $apt_get_path;
 
         $options = "--simulate dist-upgrade";
