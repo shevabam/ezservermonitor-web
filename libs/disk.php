@@ -26,7 +26,7 @@ else
     {
         list($filesystem, $type, $total, $used, $free, $percent, $mount) = explode(',', $mounted);
 
-        if ($percent > 100)
+        if ((int)trim($percent, '%') > 100)
             $percent = 100;
 
         if (strpos($type, 'tmpfs') !== false && $Config->get('disk:show_tmpfs') === false)
