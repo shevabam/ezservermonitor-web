@@ -16,6 +16,7 @@ In its [Web](http://www.ezservermonitor.com/esm-web/features) version eSM is a P
 - **Last login** : display last 5 user connections
 - **Ping** : ping the hosts defined in the configuration file
 - **Services** : displays the status (up or down) services defined in the configuration file
+- **Package Update Status** : displays the status of pending package updates for `apt` based systems
 
 Several themes are available !
 

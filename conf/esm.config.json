@@ -67,5 +67,9 @@
                 "protocol": "tcp"
             }
         ]
-    }
+    },
+    "package_management": {
+        "apt": false,
+        "apt_update_before_check": false
+     }
 }

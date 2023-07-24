@@ -294,6 +294,44 @@ esm.getServices = function() {
 
 }
 
+esm.getAptStatus = function() {
+    var module = 'apt';
+
+    esm.reloadBlock_spin(module);
+
+    $.get('libs/'+module+'.php', function(data) {
+        var $box = $('.box#esm-'+module+' .box-content tbody');
+        $box.empty();
+
+	var html = '';
+
+        if( data.status === 0 ) {
+            console.log("apt-status", data);
+
+            var package_color = data.standard > 0 ? 'label success' : '';
+            var security_color = data.security > 0 ? 'label error' : '';
+
+            html += '<tr>';
+            html += '<td>Available Package Updates</td>';
+            html += '<td class="w5p"><span class="'+package_color+'">'+data.standard+'</span></td>';
+            html += '</tr>';
+            html += '<tr>';
+            html += '<td>Available Security Updates</td>';
+            html += '<td class="w5p"><span class="'+security_color+'">'+data.security+'</span></td>';
+            html += '</tr>';
+        } else {
+            // If the module isn't disabled, something else went wrong
+            if( data.status !== 1 ) {
+                console.error("Unable to retrieve package updates", data);
+            }
+	}
+
+	$box.append(html);
+
+        esm.reloadBlock_spin(module);
+    }, 'json');
+}
+
 
 esm.getAll = function() {
     esm.getSystem();
@@ -306,6 +344,7 @@ esm.getAll = function() {
     esm.getNetwork();
     esm.getPing();
     esm.getServices();
+    esm.getAptStatus();
 }
 
 esm.reloadBlock = function(block) {
@@ -367,5 +406,6 @@ esm.mapping = {
     last_login: esm.getLast_login,
     network: esm.getNetwork,
     ping: esm.getPing,
-    services: esm.getServices
+    services: esm.getServices,
+    apt: esm.getAptStatus
 };
