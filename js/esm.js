@@ -261,6 +261,37 @@ esm.getPing = function() {
 
 }
 
+esm.getPiStatus = function() {
+
+    var module = 'pistatus';
+    
+    esm.reloadBlock_spin(module);
+
+    $.get('libs/'+module+'.php', function(data) {
+
+        var $box = $('.box#esm-'+module+' .box-content tbody');
+        $box.empty();
+
+        for (var line in data)
+        {
+            var label_color  = data[line].status == 1 ? 'error' : 'success';
+            var label_status = data[line].status == 1 ? 'on' : 'off';
+
+            var html = '';
+            html += '<tr>';
+            html += '<td class="w5p"><span class="label '+label_color+'">'+label_status+'</span></td>';
+            html += '<td>'+data[line].name+'</td>';
+            html += '</tr>';
+
+            $box.append(html);
+        }
+    
+        esm.reloadBlock_spin(module);
+
+    }, 'json');
+
+}
+
 
 esm.getServices = function() {
 
@@ -305,6 +336,7 @@ esm.getAll = function() {
     esm.getLast_login();
     esm.getNetwork();
     esm.getPing();
+    esm.getPiStatus();
     esm.getServices();
 }
 
@@ -367,5 +399,6 @@ esm.mapping = {
     last_login: esm.getLast_login,
     network: esm.getNetwork,
     ping: esm.getPing,
+    pistatus: esm.getPiStatus,
     services: esm.getServices
 };
