@@ -62,9 +62,14 @@
             },
             {
                 "name": "SSH",
+                "binary": "sshd",
                 "host": "localhost",
                 "port": 22,
                 "protocol": "tcp"
+            },
+            {
+                "name": "Init Service",
+                "binary": "init"
             }
         ]
     }

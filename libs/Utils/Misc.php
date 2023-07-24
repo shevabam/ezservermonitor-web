@@ -138,7 +138,6 @@ class Misc
         return $return;
     }
 
-
     /**
      * Allows to pluralize a word based on a number
      * Ex : echo 'mot'.Misc::pluralize(5); ==> prints mots
@@ -154,6 +153,7 @@ class Misc
     {
         return $nb > 1 ? $plural : $singular;
     }
+
 
 
     /**
@@ -212,6 +212,39 @@ class Misc
             }
         }
 
+        return false;
+    }
+    
+    /**
+     * Checks if we are able to test for running processes on this OS
+     *
+     * @return bool                 True if the available else false
+     */
+    public static function checkIfProcessRunningAvailable()
+    {
+        if (is_executable("/bin/pidof"))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     * Checks if a process is running (using /bin/pidof)
+     *
+     * @param  string   $process    Process name to check
+     * @return bool                 True if the process is running else false
+     */
+    public static function checkIfProcessRunning($process)
+    {
+        exec("/bin/pidof $process", $response);
+        
+        if ($response)
+        {
+            return true;
+        }
+        
         return false;
     }
 }
