@@ -5,10 +5,14 @@ $Config = new Config();
 
 $datas = array();
 
+
 if (count($Config->get('ping:hosts')) > 0)
     $hosts = $Config->get('ping:hosts');
 else
     $hosts = array('google.com', 'wikipedia.org');
+
+array_push($hosts, $_SERVER["REMOTE_ADDR"]);
+$hosts = array_reverse($hosts, true);
 
 foreach ($hosts as $host)
 {
@@ -18,7 +22,7 @@ foreach ($hosts as $host)
     {
         $result[0] = 0;
     }
-    
+
     $datas[] = array(
         'host' => $host,
         'ping' => $result[0],
@@ -26,5 +30,7 @@ foreach ($hosts as $host)
 
     unset($result);
 }
+
+$datas[0]["host"] = "Station ({$_SERVER["REMOTE_ADDR"]})";
 
 echo json_encode($datas);
